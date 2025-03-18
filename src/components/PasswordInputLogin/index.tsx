@@ -1,0 +1,26 @@
+interface PasswordInputProps {
+    value: string,
+    onChange: (value:string)=> void,
+    visibility: boolean,
+    togglePasswordVisibility: ()=> void
+};
+
+export function PasswordInput({value, onChange, visibility, togglePasswordVisibility}:PasswordInputProps){
+    return (
+        <div className="w-full h-[50px] p-[10px] flex flex-row justify-center rounded-md border border-[#d6d6d6]">
+            <input 
+                type={visibility ? "text" : "password"} 
+                value={value}
+                onChange={(e)=>onChange(e.target.value)}
+                className="w-[80%] h-full outline-none"
+                placeholder="***********"
+            />
+
+            <button type="button" className="w-[20%] h-full text-[#808080] font-bold cursor-pointer" onClick={togglePasswordVisibility}>
+                {
+                    visibility ? "Ocultar" : "Mostrar"
+                }
+            </button>
+        </div>
+    );
+};

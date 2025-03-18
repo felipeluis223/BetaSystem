@@ -3,7 +3,7 @@ import { FaFacebook, FaApple } from "react-icons/fa";
 
 
 export function ForgotPassword(){
-    return <button className="w-full text-[11px] flex cursor-pointer hover:text-[#4444c9]">Esqueceu a senha?</button>
+    return <button type="button" className="w-full text-[11px] flex cursor-pointer hover:text-[#4444c9]">Esqueceu a senha?</button>
 };
 
 export function ButtonLogin(){
@@ -18,9 +18,9 @@ export function ButtonOptions(){
     return (
         <div className="w-full h-[50px]">
             <ul className="text-[2rem] flex items-center w-full h-full gap-[20px]">
-                <li><button className="cursor-pointer"><FcGoogle /></button></li>
-                <li className="text-[#1877f2]"><button className="cursor-pointer"><FaFacebook /></button></li>
-                <li><button className="cursor-pointer"><FaApple className="text-[#000000]" /></button></li>
+                <li><button type="button" className="cursor-pointer"><FcGoogle /></button></li>
+                <li className="text-[#1877f2]"><button type="button" className="cursor-pointer"><FaFacebook /></button></li>
+                <li><button type="button" className="cursor-pointer"><FaApple className="text-[#000000]" /></button></li>
             </ul>
         </div>
     );
