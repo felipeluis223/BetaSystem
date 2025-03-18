@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {TitleLogin, SubTitleLogin} from "../TitleLogin";
-import { ButtonLogin, ButtonOptions, ForgotPassword } from "../ButtonLogin";
+import { LoginButton, OptionsButton, ForgotPassword, CreateAccountButton } from "../ButtonLogin";
 import { EmailInput } from "../EmailInputLogin";
 import { PasswordInput } from "../PasswordInputLogin";
 
@@ -37,14 +37,17 @@ export default function FormLogin(){
                 <PasswordInput value={userData.password} onChange={(e)=>handleChange("password", e)} visibility={showPassword} togglePasswordVisibility={togglePasswordVisibility}/>
                 
                 <ForgotPassword />
-                <div className="w-full h-[220px] flex flex-col gap-[25px]">
-                    <ButtonLogin />
+                <div className="w-full h-[180px] flex flex-col gap-[25px]">
+                    <div className="w-full h-full flex  gap-[10px]">
+                        <LoginButton />
+                        <CreateAccountButton />
+                    </div>
 
                     <hr className="text-[#d1d1d1]"/>
                     
                     <div className="w-full h-[120px] flex flex-col gap-[15px]">    
                         <p className="w-full h-[20px] text-[15px] text-[#808080]">Outras formas de realizar o login:</p>
-                        <ButtonOptions />
+                        <OptionsButton />
                     </div>
                 </div>
             </form>
