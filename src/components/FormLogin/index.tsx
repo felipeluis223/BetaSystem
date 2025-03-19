@@ -4,6 +4,8 @@ import { LoginButton, OptionsButton, ForgotPassword, CreateAccountButton } from 
 import { EmailInput } from "../EmailInputLogin";
 import { PasswordInput } from "../PasswordInputLogin";
 
+import { login } from "../../settings/authService";
+
 type UserData = {
     email: string,
     password: string
@@ -21,10 +23,15 @@ export default function FormLogin(){
         }));
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>)=> {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>)=> {
         event?.preventDefault();
-        console.log('formulário enviado com sucesso!');
-        console.table(userData);
+        try {
+            const userCredential = await login(userData?.email, userData?.password);
+            console.log("Login bem-sucedido:", userCredential.user);
+            alert("Login realizado com sucesso!");
+          } catch (error) {
+            alert("E-mail ou senha inválidos.");
+          }
     };
 
     return (
