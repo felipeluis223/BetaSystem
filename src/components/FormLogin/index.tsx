@@ -49,29 +49,33 @@ export default function FormLogin(){
     
 
     return (
-        <section className="w-[500px] h-[500px] rounded-[30px] flex flex-col container-form-login p-[15px]">
+        <section className="w-[500px] h-[530px] rounded-[30px] flex flex-col container-form-login p-[15px]">
             <TitleLogin />
             <SubTitleLogin />
 
-            <form className="w-full h-[450px] flex flex-col gap-[15px]" onSubmit={handleSubmit}>
-                <EmailInput value={userData.email} onChange={(e)=>handleChange("email", e)} />
-                <PasswordInput value={userData.password} onChange={(e)=>handleChange("password", e)} visibility={showPassword} togglePasswordVisibility={togglePasswordVisibility}/>
-                
-                <ForgotPassword />
-                <div className="w-full h-[180px] flex flex-col gap-[25px]">
-                    <div className="w-full h-full flex  gap-[10px]">
-                        <LoginButton />
-                        <CreateAccountButton />
-                    </div>
-
-                    <hr className="text-[#d1d1d1]"/>
+            <div className="w-full h-[200px]" >
+                <form className="w-full h-full flex flex-col gap-[15px]" onSubmit={handleSubmit}>
+                    <EmailInput value={userData.email} onChange={(e)=>handleChange("email", e)} />
+                    <PasswordInput value={userData.password} onChange={(e)=>handleChange("password", e)} visibility={showPassword} togglePasswordVisibility={togglePasswordVisibility}/>
                     
-                    <div className="w-full h-[120px] flex flex-col gap-[15px]">    
-                        <p className="w-full h-[20px] text-[15px] text-[#808080]">Outras formas de realizar o login:</p>
-                        <OptionsButton />
+                    <ForgotPassword />
+                    <div className="w-full h-[180px] flex flex-col gap-[25px]">
+                        <div className="w-full h-full flex  gap-[10px]">
+                            <LoginButton />
+                        </div>
                     </div>
+                </form>
+
+                <CreateAccountButton />
+
+                <hr className="text-[#d1d1d1]"/>
+
+                <div className="w-full h-[100px] mt-[20px] flex flex-col text-center gap-[15px]">    
+                    <p className="w-full h-[20px] text-[14px] text-[#808080]">Outras formas de realizar o login:</p>
+                    <OptionsButton />
                 </div>
-            </form>
+                
+            </div>
         </section>
     );
 };

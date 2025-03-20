@@ -8,7 +8,7 @@ export function TitleLogin(){
 
 export function SubTitleLogin(){
     return (
-        <article className="w-full h-[60px] text-[16px] text-[#808080]">
+        <article className="w-full h-[40px] text-[16px] text-[#808080]">
             <p>Acesse sua conta e explore tudo o que o Beta tem a oferecer!</p>
         </article>
     );

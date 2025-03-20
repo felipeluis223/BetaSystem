@@ -18,7 +18,7 @@ export function LoginButton(){
 // Botão para criar uma conta:
 export function CreateAccountButton(){
     return (
-        <button className="w-[200px] h-[40px] text-[13px] text-[#808080] rounded-md cursor-pointer hover:text-[#4444c9]">
+        <button className="h-[60px] text-[13px] text-[#808080] rounded-md cursor-pointer hover:text-[#4444c9]">
             <p>Não tem conta? Cadastra-se</p>
         </button>
     );
@@ -28,7 +28,7 @@ export function CreateAccountButton(){
 export function OptionsButton(){
     return (
         <div className="w-full h-[50px]">
-            <ul className="text-[2rem] flex items-center w-full h-full gap-[20px]">
+            <ul className="text-[2rem] flex items-center justify-center w-full h-full gap-[20px]">
                 <li><button type="button" className="cursor-pointer"><FcGoogle /></button></li>
                 <li className="text-[#1877f2]"><button type="button" className="cursor-pointer"><FaFacebook /></button></li>
                 <li><button type="button" className="cursor-pointer"><FaApple className="text-[#000000]" /></button></li>

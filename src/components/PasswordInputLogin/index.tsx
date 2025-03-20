@@ -11,6 +11,7 @@ export function PasswordInput({value, onChange, visibility, togglePasswordVisibi
         <div className="w-full h-[50px] p-[10px] flex flex-row justify-center rounded-md border border-[#d6d6d6]">
             <input 
                 type={visibility ? "text" : "password"} 
+                required
                 value={value}
                 onChange={(e)=>onChange(e.target.value)}
                 className="w-[80%] h-full outline-none"
