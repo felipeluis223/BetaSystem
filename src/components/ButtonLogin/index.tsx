@@ -1,7 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple } from "react-icons/fa";
 
-
 export function ForgotPassword(){
     return <button type="button" className="w-full text-[11px] flex cursor-pointer hover:text-[#4444c9]">Esqueceu a senha?</button>
 };

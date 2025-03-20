@@ -15,29 +15,35 @@ export default function FormLogin(){
     const [ showPassword, setShowPassword ] = useState<boolean>(false);
     const [ userData, setUserData ] = useState<UserData>({email: "", password: ""});
 
+    // Função responsável pelo botão de exibir ou ocultar senha:
     const togglePasswordVisibility = () => setShowPassword(prev => !prev);
+
+    // Obtendo e atualizando os dados fornecidos do campo de email e senha:
     const handleChange = (field: string, value: string)=>{
         setUserData((prevData)=>({
             ...prevData,
             [field]: value,
         }));
     };
+
+    // Função responsável por realizar a verificação e autenticação do login:
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        
+        // Impedir o comportamento padrão do evento:
         event.preventDefault();
         
         try {
+            // Obtendo às credencias do usuário: 
             const userCredential = await login(userData?.email, userData?.password);
-            
+
+            // Verificando se os dados estão corretos:
             if ("status" in userCredential) {
-                // Caso de erro - credenciais inválidas:
-                alert("E-mail ou senha inválidos.");
+                alert("E-mail ou senha inválidos."); // Caso de erro - credenciais inválidas.  
             } else {
-                // Caso de sucesso
-                alert("Login realizado com sucesso!");
+                alert("Login realizado com sucesso!"); // Caso de sucesso - credencias válidas.
             }
         } catch (error) {
-            alert("Ocorreu um erro inesperado.");
-            console.error("Erro inesperado:", error);
+            alert("Ocorreu um erro inesperado no servidor.");
         }
     };
     
