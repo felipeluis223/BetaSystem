@@ -1,14 +1,14 @@
-import FormLogin from "../../components/LoginForm"
-import WallpaperLogin from "../../components/LoginWallpaper"
+import LoginForm from "../../components/LoginForm";
+import LoginWallpaper from "../../components/LoginWallpaper";
 
 export default function LoginTemplate (){
     return (
         <section className="w-full h-screen flex flex-row ">
-            <WallpaperLogin />
+            <LoginWallpaper />
 
             <section className="w-[65%] h-full bg-[#f1f1f1] flex justify-center items-center">
-                <FormLogin />
+                <LoginForm />
             </section>
         </section>
     )
-}
+};

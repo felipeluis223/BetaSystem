@@ -5,16 +5,18 @@ import { EmailInput } from "../LoginEntryEmail";
 import { PasswordInput } from "../LoginInputPassword";
 
 import { login } from "../../settings/firebase/authService";
-import { CreateAccountButton } from "../CreateAccountButton";
+import { RegisterAccountButton } from "../RegisterAccountButton";
+import RegisterUserModal from "../RegisterAccountForm";
 
 type UserData = {
     email: string,
     password: string
 };
 
-export default function FormLogin(){
+export default function LoginForm(){
     const [ showPassword, setShowPassword ] = useState<boolean>(false);
     const [ userData, setUserData ] = useState<UserData>({email: "", password: ""});
+    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(true);
 
     // Função responsável pelo botão de exibir ou ocultar senha:
     const togglePasswordVisibility = () => setShowPassword(prev => !prev);
@@ -50,35 +52,42 @@ export default function FormLogin(){
         }
     };
     
+    console.log(isModalOpen)
 
     return (
-        <section className="w-[500px] h-[530px] rounded-[30px] flex flex-col container-form-login p-[15px]">
-            <TitleLogin />
-            <SubTitleLogin />
+        <>
+            <section className="w-[500px] h-[530px] rounded-[30px] flex flex-col container-form-login p-[15px]">
+                <TitleLogin />
+                <SubTitleLogin />
 
-            <div className="w-full h-[200px]" >
-                <form className="w-full h-full flex flex-col gap-[15px]" onSubmit={handleSubmit}>
-                    <EmailInput value={userData.email} onChange={(e)=>handleChange("email", e)} />
-                    <PasswordInput value={userData.password} onChange={(e)=>handleChange("password", e)} visibility={showPassword} togglePasswordVisibility={togglePasswordVisibility}/>
-                    
-                    <ForgotPassword />
-                    <div className="w-full h-[180px] flex flex-col gap-[25px]">
-                        <div className="w-full h-full flex  gap-[10px]">
-                            <LoginButton />
+                <div className="w-full h-[200px]" >
+                    <form className="w-full h-full flex flex-col gap-[15px]" onSubmit={handleSubmit}>
+                        <EmailInput value={userData.email} onChange={(e)=>handleChange("email", e)} />
+                        <PasswordInput placeholder="********" value={userData.password} onChange={(e)=>handleChange("password", e)} visibility={showPassword} togglePasswordVisibility={togglePasswordVisibility}/>
+                        
+                        <ForgotPassword />
+                        <div className="w-full h-[180px] flex flex-col gap-[25px]">
+                            <div className="w-full h-full flex  gap-[10px]">
+                                <LoginButton />
+                            </div>
                         </div>
+                    </form>
+
+                    <RegisterAccountButton onClick={() => setIsModalOpen(true)}  />
+
+                    <hr className="text-[#d1d1d1]"/>
+
+                    <div className="w-full h-[100px] mt-[20px] flex flex-col text-center gap-[15px]">    
+                        <p className="w-full h-[20px] text-[14px] text-[#808080]">Outras formas de realizar o login:</p>
+                        <OptionsButton />
                     </div>
-                </form>
 
-                <CreateAccountButton />
-
-                <hr className="text-[#d1d1d1]"/>
-
-                <div className="w-full h-[100px] mt-[20px] flex flex-col text-center gap-[15px]">    
-                    <p className="w-full h-[20px] text-[14px] text-[#808080]">Outras formas de realizar o login:</p>
-                    <OptionsButton />
                 </div>
+            </section>
 
-            </div>
-        </section>
+            {
+                isModalOpen && <RegisterUserModal onClose={()=>setIsModalOpen(false)} />
+            }
+        </>
     );
 };
