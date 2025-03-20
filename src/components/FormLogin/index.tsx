@@ -22,17 +22,25 @@ export default function FormLogin(){
             [field]: value,
         }));
     };
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>)=> {
-        event?.preventDefault();
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        
         try {
             const userCredential = await login(userData?.email, userData?.password);
-            console.log("Login bem-sucedido:", userCredential.user);
-            alert("Login realizado com sucesso!");
-          } catch (error) {
-            alert("E-mail ou senha inválidos.");
-          }
+            
+            if ("status" in userCredential) {
+                // Caso de erro - credenciais inválidas:
+                alert("E-mail ou senha inválidos.");
+            } else {
+                // Caso de sucesso
+                alert("Login realizado com sucesso!");
+            }
+        } catch (error) {
+            alert("Ocorreu um erro inesperado.");
+            console.error("Erro inesperado:", error);
+        }
     };
+    
 
     return (
         <section className="w-[500px] h-[500px] rounded-[30px] flex flex-col container-form-login p-[15px]">

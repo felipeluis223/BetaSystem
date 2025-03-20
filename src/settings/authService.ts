@@ -12,17 +12,23 @@ export const saveUser = async (uid: string, email: string) => {
     });
   } catch (error) {
     console.error("Erro ao salvar usuário:", error);
-    throw error;
+    // throw error;
   }
 };
 
-export const login = async (email: string, password: string): Promise<UserCredential> => {
+interface AuthError {
+  status: number,
+  message: string
+}
+
+export const login = async (email: string, password: string): Promise<UserCredential | AuthError> => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("Usuário logado:", userCredential.user);
     return userCredential;
   } catch (error: any) {
-    console.error("Erro ao fazer login:", error);
-    throw error;
+    return  {
+      status: 400,
+      message: error || "Houve um problema no servidor..."
+    }
   }
 };
