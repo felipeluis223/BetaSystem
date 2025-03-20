@@ -1,10 +1,12 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple } from "react-icons/fa";
 
+// Botão de "Esqueci a senha":
 export function ForgotPassword(){
     return <button type="button" className="w-full text-[11px] flex cursor-pointer hover:text-[#4444c9]">Esqueceu a senha?</button>
 };
 
+// Botão para realizar o login:
 export function LoginButton(){
     return (
         <button className="w-[250px] h-[40px] bg-[#040404] text-[#f1f1f1] rounded-md cursor-pointer">
@@ -13,6 +15,7 @@ export function LoginButton(){
     );
 };
 
+// Botão para criar uma conta:
 export function CreateAccountButton(){
     return (
         <button className="w-[200px] h-[40px] text-[13px] text-[#808080] rounded-md cursor-pointer hover:text-[#4444c9]">
@@ -21,6 +24,7 @@ export function CreateAccountButton(){
     );
 };
 
+// Botões de outras maneiras de realizar o login (Google, Facebook e Apple):
 export function OptionsButton(){
     return (
         <div className="w-full h-[50px]">
