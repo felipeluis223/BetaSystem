@@ -5,6 +5,7 @@ interface PasswordInputProps {
     togglePasswordVisibility: ()=> void
 };
 
+// Componente do campo de entrada (Senha), obtendo o valor:
 export function PasswordInput({value, onChange, visibility, togglePasswordVisibility}:PasswordInputProps){
     return (
         <div className="w-full h-[50px] p-[10px] flex flex-row justify-center rounded-md border border-[#d6d6d6]">

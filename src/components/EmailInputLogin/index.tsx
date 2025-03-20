@@ -3,6 +3,8 @@ interface EmailInputProps {
     onChange: (value: string)=> void
 }
 
+
+// Componente do campo de entrada (Email), obtendo o valor:
 export function EmailInput({value, onChange}:EmailInputProps){
     return (
         <input 
