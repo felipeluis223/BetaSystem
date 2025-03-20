@@ -1,5 +1,5 @@
-import FormLogin from "../../components/FormLogin"
-import WallpaperLogin from "../../components/WallpaperLogin"
+import FormLogin from "../../components/LoginForm"
+import WallpaperLogin from "../../components/LoginWallpaper"
 
 export default function LoginTemplate (){
     return (

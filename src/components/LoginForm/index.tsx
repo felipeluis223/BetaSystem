@@ -1,10 +1,11 @@
 import { useState } from "react";
-import {TitleLogin, SubTitleLogin} from "../TitleLogin";
-import { LoginButton, OptionsButton, ForgotPassword, CreateAccountButton } from "../ButtonLogin";
-import { EmailInput } from "../EmailInputLogin";
-import { PasswordInput } from "../PasswordInputLogin";
+import {TitleLogin, SubTitleLogin} from "../LoginTitle";
+import { LoginButton, OptionsButton, ForgotPassword } from "../LoginButton";
+import { EmailInput } from "../LoginEntryEmail";
+import { PasswordInput } from "../LoginInputPassword";
 
-import { login } from "../../settings/authService";
+import { login } from "../../settings/firebase/authService";
+import { CreateAccountButton } from "../CreateAccountButton";
 
 type UserData = {
     email: string,
@@ -35,12 +36,14 @@ export default function FormLogin(){
         try {
             // Obtendo às credencias do usuário: 
             const userCredential = await login(userData?.email, userData?.password);
+            console.log('DATA:', userCredential);
 
             // Verificando se os dados estão corretos:
-            if ("status" in userCredential) {
-                alert("E-mail ou senha inválidos."); // Caso de erro - credenciais inválidas.  
-            } else {
+            if(userCredential?.authentication){
                 alert("Login realizado com sucesso!"); // Caso de sucesso - credencias válidas.
+            }
+            else{
+                alert("E-mail ou senha inválidos."); // Caso de erro - credenciais inválidas.  
             }
         } catch (error) {
             alert("Ocorreu um erro inesperado no servidor.");
@@ -74,7 +77,7 @@ export default function FormLogin(){
                     <p className="w-full h-[20px] text-[14px] text-[#808080]">Outras formas de realizar o login:</p>
                     <OptionsButton />
                 </div>
-                
+
             </div>
         </section>
     );
