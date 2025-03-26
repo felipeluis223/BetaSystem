@@ -1,5 +1,6 @@
 import apiBeta from "../../services/betaAPI";
 
+// Informações esperadas pelo retorno da API:
 interface LoginResponse {
     token: string;
 };
@@ -9,6 +10,7 @@ interface LoginData {
     password: string;
 }
 
+// Informações passadas para API para realizarmos o login:
 const loginAPI = async (data:LoginData): Promise<string | null>=>{
     try{
         const token = await apiBeta.post<LoginResponse>("/login", data);
