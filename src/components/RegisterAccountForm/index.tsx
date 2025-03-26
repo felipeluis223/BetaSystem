@@ -3,7 +3,6 @@ import { MdClose } from "react-icons/md";
 import { EmailInput } from "../LoginEntryEmail";
 import { PasswordInput } from "../LoginInputPassword";
 import { NameInput } from "../RegisterAccountName";
-import { registerUser } from "../../settings/firebase/createUserService";
 
 type RegisterUserModalProps = {
     onClose: () => void;
@@ -29,16 +28,16 @@ export default function RegisterUserModal({ onClose }: RegisterUserModalProps) {
     const handleRegisterData = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        try {
-            // Obtendo as credenciais do usuário
-            const response = await registerUser(userData.email, userData.password, userData.name);
-            console.log("DATA:", response);
+        // try {
+        //     // Obtendo as credenciais do usuário
+        //     const response = await registerUser(userData.email, userData.password, userData.name);
+        //     console.log("DATA:", response);
 
-            alert("Cadastro realizado com sucesso!");
-            onClose(); // Fecha o modal após o cadastro
-        } catch (error) {
-            alert("Ocorreu um erro inesperado no servidor.");
-        }
+        //     alert("Cadastro realizado com sucesso!");
+        //     onClose(); // Fecha o modal após o cadastro
+        // } catch (error) {
+        //     alert("Ocorreu um erro inesperado no servidor.");
+        // }
     };
 
     return (

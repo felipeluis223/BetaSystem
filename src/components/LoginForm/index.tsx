@@ -4,9 +4,10 @@ import { LoginButton, OptionsButton, ForgotPassword } from "../LoginButton";
 import { EmailInput } from "../LoginEntryEmail";
 import { PasswordInput } from "../LoginInputPassword";
 
-import { login } from "../../settings/firebase/authService";
 import { RegisterAccountButton } from "../RegisterAccountButton";
 import RegisterUserModal from "../RegisterAccountForm";
+import apiBeta from "../../services/betaAPI";
+import loginAPI from "./login";
 
 type UserData = {
     email: string,
@@ -16,7 +17,7 @@ type UserData = {
 export default function LoginForm(){
     const [ showPassword, setShowPassword ] = useState<boolean>(false);
     const [ userData, setUserData ] = useState<UserData>({email: "", password: ""});
-    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(true);
+    const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
 
     // Função responsável pelo botão de exibir ou ocultar senha:
     const togglePasswordVisibility = () => setShowPassword(prev => !prev);
@@ -34,25 +35,17 @@ export default function LoginForm(){
         
         // Impedir o comportamento padrão do evento:
         event.preventDefault();
-        
-        try {
-            // Obtendo às credencias do usuário: 
-            const userCredential = await login(userData?.email, userData?.password);
-            console.log('DATA:', userCredential);
 
-            // Verificando se os dados estão corretos:
-            if(userCredential?.authentication){
-                alert("Login realizado com sucesso!"); // Caso de sucesso - credencias válidas.
-            }
-            else{
-                alert("E-mail ou senha inválidos."); // Caso de erro - credenciais inválidas.  
-            }
-        } catch (error) {
-            alert("Ocorreu um erro inesperado no servidor.");
+        try{
+            const userToken = await loginAPI({"email": userData.email, "password": userData.password });
+            console.log('token: ', userToken);
+
+        }
+        catch(e){
+            console.log('-----ERRO-----');
+            console.log('tivemos um erro: ',e);
         }
     };
-    
-    console.log(isModalOpen)
 
     return (
         <>
