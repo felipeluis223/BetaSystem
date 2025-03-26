@@ -6,7 +6,6 @@ import { PasswordInput } from "../LoginInputPassword";
 
 import { RegisterAccountButton } from "../RegisterAccountButton";
 import RegisterUserModal from "../RegisterAccountForm";
-import apiBeta from "../../services/betaAPI";
 import loginAPI from "./login";
 
 type UserData = {
@@ -39,11 +38,10 @@ export default function LoginForm(){
         try{
             const userToken = await loginAPI({"email": userData.email, "password": userData.password });
             console.log('token: ', userToken);
-
         }
         catch(e){
-            console.log('-----ERRO-----');
             console.log('tivemos um erro: ',e);
+            alert("Ocorreu um erro inesperado no servidor.");
         }
     };
 
