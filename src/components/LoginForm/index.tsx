@@ -38,6 +38,13 @@ export default function LoginForm(){
         try{
             const userToken = await loginAPI({"email": userData.email, "password": userData.password });
             console.log('token: ', userToken);
+            if(userToken != null){
+                alert("Navegar para Home");
+            }
+            else{
+                alert("Houve um problema no cadastro. Verifique suas informações e tente novamente.");
+            }
+
         }
         catch(e){
             console.log('tivemos um erro: ',e);
