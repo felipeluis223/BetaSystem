@@ -8,7 +8,7 @@ interface EmailInputProps {
 export function EmailInput({value, onChange}:EmailInputProps){
     return (
         <input 
-            type="text" 
+            type="email" 
             required
             value={value}
             onChange={(e)=>onChange(e.target.value)}
