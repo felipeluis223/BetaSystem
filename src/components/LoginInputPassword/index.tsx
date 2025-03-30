@@ -6,6 +6,8 @@ interface PasswordInputProps {
     placeholder: string;
 };
 
+
+
 // Componente do campo de entrada (Senha), obtendo o valor:
 export function PasswordInput({value, onChange, visibility, togglePasswordVisibility, placeholder="*********"}:PasswordInputProps){
     return (

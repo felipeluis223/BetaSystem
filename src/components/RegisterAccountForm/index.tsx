@@ -36,11 +36,16 @@ export default function RegisterUserModal({ onClose }: RegisterUserModalProps) {
                 "email": userData.email,
                 "password": userData.password
             });
-            console.log("DATA:", response);
 
-            alert("Cadastro realizado com sucesso!");
-            onClose(); // Fecha o modal após o cadastro
-            
+            // Verificando o processo de cadastro:
+            if(response != null){
+                alert("Cadastro realizado com sucesso!");
+                onClose(); // Fecha o modal após o cadastro    
+            }
+            else{
+                alert("Houve um problema no cadastro. Verifique suas informações e tente novamente.");
+            }
+
         } catch (error) {
             console.log('TIVEMOS UM ERRO: ', error);
             alert("Ocorreu um erro inesperado no servidor.");

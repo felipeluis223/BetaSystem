@@ -6,29 +6,27 @@ interface RegisterResponse {
     name: string;
     email: string;
     password: string;
-    updateAt: string;
+    updatedAt: string;
     createdAt: string;
-};
+}
 
 // Informações passadas para API para criarmos um usuário:
 interface RegisterData {
     name: string;
     email: string;
     password: string;
-};
+}
 
 // Rota de cadastro de usuário:
-const registerAPI = async (data:RegisterData): Promise<string | null>=>{
-    try{
+const registerAPI = async (data: RegisterData): Promise<RegisterResponse | null> => {
+    try {
         const response = await apiBeta.post<RegisterResponse>("/users", data);
-        console.log('Data: ', response);
-        return response.statusText;
-
-    }catch(e){
-        console.log('erro: ', e)
+        console.log("Usuário cadastrado com sucesso:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao cadastrar usuário:", error);
         return null;
     }
-
 };
 
 export default registerAPI;
