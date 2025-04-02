@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import apiBeta from "../../services/betaAPI";
 
 // Informações esperadas pelo retorno da API:
@@ -18,14 +19,12 @@ interface RegisterData {
 }
 
 // Rota de cadastro de usuário:
-const registerAPI = async (data: RegisterData): Promise<RegisterResponse | null> => {
+const registerAPI = async (data: RegisterData): Promise<AxiosResponse<RegisterResponse> | null> => {
     try {
         const response = await apiBeta.post<RegisterResponse>("/users", data);
-        console.log("Usuário cadastrado com sucesso:", response.data);
-        return response.data;
+        return response
     } catch (error) {
-        console.error("Erro ao cadastrar usuário:", error);
-        return null;
+        return error;
     }
 };
 

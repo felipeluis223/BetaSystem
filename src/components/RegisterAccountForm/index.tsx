@@ -31,23 +31,21 @@ export default function RegisterUserModal({ onClose }: RegisterUserModalProps) {
 
         try {
             // Obtendo as credenciais do usuário
-            const response = await registerAPI({
+            const res = await registerAPI({
                 "name": userData.name,
                 "email": userData.email,
                 "password": userData.password
             });
 
-            // Verificando o processo de cadastro:
-            if(response != null){
+            if(res?.status === 201){
+                onClose(); // Fecha o modal após o cadastro
                 alert("Cadastro realizado com sucesso!");
-                onClose(); // Fecha o modal após o cadastro    
-            }
+            }   
             else{
-                alert("Houve um problema no cadastro. Verifique suas informações e tente novamente.");
+                alert(res.response.data.message)
             }
 
         } catch (error) {
-            console.log('TIVEMOS UM ERRO: ', error);
             alert("Ocorreu um erro inesperado no servidor.");
         }
     };
