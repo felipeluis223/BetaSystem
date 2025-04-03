@@ -39,6 +39,7 @@ export default function LoginForm(){
             const userToken = await loginAPI({"email": userData.email, "password": userData.password });
             console.log('token: ', userToken);
             if(userToken != null){
+                localStorage.setItem("tokenBeta", userToken); //Armazenando no localStorage.
                 alert("Navegar para Home");
             }
             else{
