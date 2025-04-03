@@ -30,6 +30,10 @@ export default function RegisterUserModal({ onClose }: RegisterUserModalProps) {
         event.preventDefault();
 
         try {
+            if(userData.password.length < 6){
+                alert("Por segurança, a senha deve ter pelo menos 6 caracteres.");
+                return;
+            }
             // Obtendo as credenciais do usuário
             const res = await registerAPI({
                 "name": userData.name,
@@ -77,7 +81,7 @@ export default function RegisterUserModal({ onClose }: RegisterUserModalProps) {
                     <PasswordInput
                         placeholder="**********"
                         value={userData.password}
-                        onChange={value => handleChange("password", value)}                         visibility={showPassword}
+                        onChange={value => handleChange("password", value)} visibility={showPassword}
                         togglePasswordVisibility={() => setShowPassword(prev => !prev)} 
                     />
 
