@@ -7,6 +7,7 @@ import { PasswordInput } from "../LoginInputPassword";
 import { RegisterAccountButton } from "../RegisterAccountButton";
 import RegisterUserModal from "../RegisterAccountForm";
 import loginAPI from "./login";
+import { useNavigate } from "react-router-dom";
 
 type UserData = {
     email: string,
@@ -17,6 +18,8 @@ export default function LoginForm(){
     const [ showPassword, setShowPassword ] = useState<boolean>(false);
     const [ userData, setUserData ] = useState<UserData>({email: "", password: ""});
     const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     // Função responsável pelo botão de exibir ou ocultar senha:
     const togglePasswordVisibility = () => setShowPassword(prev => !prev);
@@ -31,7 +34,7 @@ export default function LoginForm(){
 
     // Função responsável por realizar a verificação e autenticação do login:
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        
+
         // Impedir o comportamento padrão do evento:
         event.preventDefault();
 
@@ -39,14 +42,15 @@ export default function LoginForm(){
             const userToken = await loginAPI({"email": userData.email, "password": userData.password });
             console.log('token: ', userToken);
             if(userToken != null){
-                localStorage.setItem("tokenBeta", userToken); //Armazenando no localStorage.
-                alert("Navegar para Home");
+                localStorage.setItem("tokenBeta", userToken); // Armazenando no localStorage.
 
                 // Zerando os inputs do login:
                 setUserData({
                     email: "",
                     password: ""
                 });
+
+                navigate("/home"); // Navegando para a home.
             }
             else{
                 alert("Houve um problema no cadastro. Verifique suas informações e tente novamente.");
