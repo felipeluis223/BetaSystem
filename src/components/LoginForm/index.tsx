@@ -41,6 +41,12 @@ export default function LoginForm(){
             if(userToken != null){
                 localStorage.setItem("tokenBeta", userToken); //Armazenando no localStorage.
                 alert("Navegar para Home");
+
+                // Zerando os inputs do login:
+                setUserData({
+                    email: "",
+                    password: ""
+                });
             }
             else{
                 alert("Houve um problema no cadastro. Verifique suas informações e tente novamente.");
