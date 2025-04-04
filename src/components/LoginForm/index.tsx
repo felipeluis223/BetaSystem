@@ -76,7 +76,7 @@ export default function LoginForm(){
                         
                         <ForgotPassword />
                         <div className="w-full h-[180px] flex flex-col gap-[25px]">
-                            <div className="w-full h-full flex  gap-[10px]">
+                            <div className="w-full h-full flex justify-center md:justify-start gap-[10px]">
                                 <LoginButton />
                             </div>
                         </div>
