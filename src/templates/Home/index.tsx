@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function HomeTemplate(){
-    
+
     const navigate = useNavigate();
     
     // Verificando se há token no localStorage para permitir o acesso:

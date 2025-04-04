@@ -44,7 +44,7 @@ export default function LoginForm(){
             if(userToken != null){
                 localStorage.setItem("tokenBeta", userToken); // Armazenando no localStorage.
 
-                // Zerando os inputs do login:
+                // Zerando os valores - input do login:
                 setUserData({
                     email: "",
                     password: ""
@@ -65,11 +65,11 @@ export default function LoginForm(){
 
     return (
         <>
-            <section className="w-[500px] h-[530px] rounded-[30px] flex flex-col container-form-login p-[15px]">
+            <section className="w-full md:w-[500px] h-[530px] rounded-[30px] flex flex-col container-form-login p-[15px]">
                 <TitleLogin />
                 <SubTitleLogin />
 
-                <div className="w-full h-[200px]" >
+                <div className="w-full md:w-[80%] h-[200px]" >
                     <form className="w-full h-full flex flex-col gap-[15px]" onSubmit={handleSubmit}>
                         <EmailInput value={userData.email} onChange={(e)=>handleChange("email", e)} />
                         <PasswordInput placeholder="********" value={userData.password} onChange={(e)=>handleChange("password", e)} visibility={showPassword} togglePasswordVisibility={togglePasswordVisibility}/>
