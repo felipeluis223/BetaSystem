@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import HomeHeader from "../../components/HomeHeader";
 
 function HomeTemplate(){
 
@@ -18,8 +19,8 @@ function HomeTemplate(){
     }, [navigate]);
     
     return (
-        <section>
-            <h2>Welcome in Home - test</h2>
+        <section className="w-full h-screen">
+            <HomeHeader />
         </section>
     );
 };
