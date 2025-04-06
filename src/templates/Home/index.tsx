@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import HomeHeader from "../../components/HomeHeader";
 
 function HomeTemplate(){
@@ -21,8 +21,8 @@ function HomeTemplate(){
     return (
         <section className="w-full h-screen">
             <HomeHeader />
-            <section className="w-full h-[90%] bg-[red]">
-
+            <section className="w-full h-[90%]">
+                <Outlet />
             </section>
         </section>
     );
