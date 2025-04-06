@@ -5,7 +5,7 @@ export default function HomeHeader() {
     const nameMock: string = "Luis Felipe";
 
     return (
-        <header className="w-full h-auto bg-[#040404] flex flex-row justify-between shadow-md relative z-50">
+        <header className="w-full h-[10%] bg-[#040404] flex flex-row justify-between shadow-md relative z-50">
             <section className="w-[20%] h-[80px] flex items-center justify-center gap-[10px] font-bold text-white">
                 <IoPersonCircleOutline className="text-[2rem] text-[#ffffff]" />
                 <h3 className="text-lg text-[#22c55e]">{nameMock}</h3>

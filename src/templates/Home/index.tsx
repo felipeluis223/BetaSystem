@@ -21,6 +21,9 @@ function HomeTemplate(){
     return (
         <section className="w-full h-screen">
             <HomeHeader />
+            <section className="w-full h-[90%] bg-[red]">
+
+            </section>
         </section>
     );
 };
