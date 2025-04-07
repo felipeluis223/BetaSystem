@@ -1,4 +1,5 @@
 import ContentManager from './components/ContentManager';
+import NotFoundPage from './components/NotFoundPage';
 import HomeTemplate from './templates/Home';
 import LoginTemplate from './templates/Login'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -27,6 +28,9 @@ function App() {
         <Route path="/home" element= { <HomeTemplate/> } >
           <Route path="funcionarios" element= {<ContentManager data={employeeData} />} />  
         </Route>
+        
+        <Route path="*" element={<NotFoundPage />} />
+
 
       </Routes>
     </Router>
