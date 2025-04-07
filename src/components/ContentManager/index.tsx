@@ -1,3 +1,5 @@
+import contentAPI from "./content";
+
 interface PropsData {
     title: string;
     table: {
@@ -8,11 +10,23 @@ interface PropsData {
     };
   }
   
+
+interface PropsRoute {
+  route: string
+}
   // Gerenciar conteúdos vindo da API:
-  export default function ContentManager({ data }: { data: PropsData }) {  
+  export default function ContentManager({ route }: { data: PropsRoute }) {
+    
+    console.log(route)
+  const api = async()=>{
+    const res = await contentAPI({route: route});
+    console.log('res: ', res)
+  }  
+  
     return (
       <section>
-        <h2>{data.title}</h2>
+        <button onClick={api}>chamar</button>
+        {/* <h2>{data.title}</h2>
         <table>
           <thead>
             <tr>
@@ -28,7 +42,7 @@ interface PropsData {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
       </section>
     );
   }
