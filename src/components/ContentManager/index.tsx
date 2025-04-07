@@ -1,22 +1,35 @@
 interface PropsData {
-    title: string,
+    title: string;
     table: {
-        columns: string[];
-    }
-};
-
-// Gerenciar conteúdos vindo da API:
-export default function ContentManager({ data }: { data: PropsData }){
-    const dataMock:PropsData = {
-        title: "Tabela de funcionários",
-        table: {
-            columns: ["id", "name", "cpf", "rg", "Email", "phone"]
-        }
+      data: {
+        column: string;
+        data: string;
+      }[];
     };
-    
-    return(
-        <section>
-
-        </section>
+  }
+  
+  // Gerenciar conteúdos vindo da API:
+  export default function ContentManager({ data }: { data: PropsData }) {  
+    return (
+      <section>
+        <h2>{data.title}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Coluna</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.table.data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.column}</td>
+                <td>{item.data}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
     );
-};
+  }
+  
