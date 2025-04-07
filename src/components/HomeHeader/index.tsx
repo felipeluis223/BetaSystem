@@ -1,5 +1,6 @@
 import menuItems from "./data";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function HomeHeader() {
     const nameMock: string = "Luis Felipe";
@@ -22,11 +23,13 @@ export default function HomeHeader() {
                             {menu.children.length > 0 && (
                                 <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-[#1f1f1f] text-sm p-2 rounded shadow-lg w-48 z-40 transform group-hover:translate-y-1 transition-all duration-150">
                                     {menu.children.map((subitem) => (
-                                        <li
-                                            key={subitem}
-                                            className="py-1 px-2 hover:bg-[#16a34a] cursor-pointer rounded"
-                                        >
-                                            {subitem}
+                                        <li key={subitem.route}>
+                                            <Link
+                                                to={subitem.route}
+                                                className="block py-1 px-2 hover:bg-[#16a34a] cursor-pointer rounded"
+                                            >
+                                                {subitem.name}
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>

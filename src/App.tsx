@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <LoginTemplate /> } />
         <Route path="/home" element= { <HomeTemplate/> } >
-          <Route path="employee" element= {<ContentManager data={employeeData} />} />  
+          <Route path="funcionarios" element= {<ContentManager data={employeeData} />} />  
         </Route>
 
       </Routes>
