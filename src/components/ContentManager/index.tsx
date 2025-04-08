@@ -16,8 +16,6 @@ interface PropsRoute {
 }
   // Gerenciar conteúdos vindo da API:
   export default function ContentManager({ route }: { data: PropsRoute }) {
-    
-    console.log(route)
   const api = async()=>{
     const res = await contentAPI({route: route});
     console.log('res: ', res)
