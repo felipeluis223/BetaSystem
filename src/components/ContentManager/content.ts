@@ -12,7 +12,7 @@ const contentAPI = async ({ route }: ContentData): Promise<string[] | null> => {
     try {
         const response = await apiBeta.get<ContentResponse>(`${route}`);
         console.log('resposta: ', response)
-        return response.data.data; // retorna o array de strings
+        return response.data;
     } catch (e) {
         console.log("error: ", e);
         return null;

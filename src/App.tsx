@@ -11,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={ <LoginTemplate /> } />
         <Route path="/home" element= { <HomeTemplate/> } >
-          <Route path="funcionarios" element= {<ContentManager route={"employees"} />} />  
+          <Route path="funcionarios" element= {<ContentManager route={"employees"} />} /> 
+          <Route path="usuarios" element= {<ContentManager route={"users"} />} />  
         </Route>
         
         <Route path="*" element={<NotFoundPage />} />
