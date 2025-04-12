@@ -1,47 +1,50 @@
+import { useState } from "react";
 import contentAPI from "./content";
 
-interface PropsData {
-    title: string;
-    table: {
-      data: {
-        column: string;
-        data: string;
-      }[];
-    };
-  }
-  
-
 interface PropsRoute {
-  route: string
+  route: string;
 }
-  // Gerenciar conteúdos vindo da API:
+
+interface PropsData {
+  createdAt: string;
+  email: string;
+  password: string;
+  updatedAt: string;
+  id: string;
+  name: string;
+}
+
+// Gerenciar conteúdos vindo da API:
 export default function ContentManager({ route }: PropsRoute) {
-  const api = async()=>{
-    const res = await contentAPI({route: route});
-    console.log('res: ', res)
-  }  
-  
-    return (
-      <section>
-        <button onClick={api}>chamar</button>
-        {/* <h2>{data.title}</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Coluna</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.table.data.map((item, index) => (
-              <tr key={index}>
-                <td>{item.column}</td>
-                <td>{item.data}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
-      </section>
-    );
-  }
-  
+  const [data, setData] = useState<PropsData[]>([]); // Agora é um array
+
+  const api = async () => {
+    const result = await contentAPI({ route });
+    console.log("API Result:", result);
+
+    if (result) {
+      setData(result); // Assume que result é PropsData[]
+    }
+  };
+
+  return (
+    <section>
+      <button onClick={api}>chamar</button>
+
+      {data.length > 0 && (
+        <div>
+          {data.map((user, index) => (
+            <div key={index} style={{ marginBottom: "1rem" }}>
+              <h2>Nome: {user.name}</h2>
+              <p>Email: {user.email}</p>
+              <p>ID: {user.id}</p>
+              <p>Criado em: {user.createdAt}</p>
+              <p>Atualizado em: {user.updatedAt}</p>
+              <hr />
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
