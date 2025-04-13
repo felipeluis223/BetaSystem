@@ -8,6 +8,7 @@ import LoginTemplate from './templates/Login';
 function RedirectOnToken() {
   const navigate = useNavigate();
 
+  // Verificando o token e navegando para a rota - home:
   useEffect(() => {
     const token = localStorage.getItem("tokenBeta");
     if (token != null) {
