@@ -43,7 +43,7 @@ export default function LoginForm(){
 
         try{
             const userToken = await loginAPI({"email": userData.email, "password": userData.password });
-            console.log('token: ', userToken);
+
             if(userToken != null){
                 
                 dispatch(setToken(userToken)); // Armazenando o token no estado da aplicação.

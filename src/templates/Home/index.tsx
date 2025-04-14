@@ -1,23 +1,19 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import HomeHeader from "../../components/HomeHeader";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
-function HomeTemplate(){
-
+function HomeTemplate() {
     const navigate = useNavigate();
-    
-    // Verificando se há token no localStorage para permitir o acesso:
-    useEffect(() => {
-        const getToken = () => {
-            const token = localStorage.getItem("tokenBeta");
-            if (!token) {
-                navigate("/");
-            };
-        };
+    const token = useSelector((state: RootState) => state.auth.token);
 
-    getToken();
-    }, [navigate]);
-    
+    useEffect(() => {
+        if (!token) {
+            navigate("/");
+        }
+    }, [token, navigate]);
+
     return (
         <section className="w-full h-screen">
             <HomeHeader />
@@ -26,6 +22,6 @@ function HomeTemplate(){
             </section>
         </section>
     );
-};
+}
 
 export default HomeTemplate;

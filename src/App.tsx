@@ -9,21 +9,22 @@ import { RootState } from './redux/store';
 
 function RedirectOnToken() {
   const navigate = useNavigate();
-  const token = useSelector((state: RootState) => state.auth.token);  // Aqui o token é diretamente obtido
+  const token = useSelector((state: RootState) => state.auth.token);  // Acessa o token do Redux
 
   useEffect(() => {
-    if (token) { // Verificando se o token existe
-      navigate("/home");  // Redireciona para a página inicial
+    // Verifica se o token existe e se a rota atual não é '/home'
+    if (token && window.location.pathname !== "/home") {
+      navigate("/home");
     }
-  }, [token, navigate]);
+  }, [token, navigate]);  // O useEffect só será chamado quando o token mudar
 
-  return null;  // Componente não precisa renderizar nada
+  return null;  // Não precisa renderizar nada
 }
 
 function App() {
   return (
     <Router>
-      <RedirectOnToken />  {/* Componente de redirecionamento */}
+      {/* <RedirectOnToken />  Componente de redirecionamento */}
       <Routes>
         <Route path="/" element={<LoginTemplate />} />
         <Route path="/home" element={<HomeTemplate />}>
