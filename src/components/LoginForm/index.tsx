@@ -8,6 +8,8 @@ import { RegisterAccountButton } from "../RegisterAccountButton";
 import RegisterUserModal from "../RegisterAccountForm";
 import loginAPI from "./login";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../redux/authSlice";
 
 type UserData = {
     email: string,
@@ -20,6 +22,7 @@ export default function LoginForm(){
     const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // Função responsável pelo botão de exibir ou ocultar senha:
     const togglePasswordVisibility = () => setShowPassword(prev => !prev);
@@ -42,8 +45,9 @@ export default function LoginForm(){
             const userToken = await loginAPI({"email": userData.email, "password": userData.password });
             console.log('token: ', userToken);
             if(userToken != null){
-                localStorage.setItem("tokenBeta", userToken); // Armazenando no localStorage.
-
+                
+                dispatch(setToken(userToken)); // Armazenando o token no estado da aplicação.
+                
                 // Zerando os valores - input do login:
                 setUserData({
                     email: "",

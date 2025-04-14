@@ -4,25 +4,26 @@ import ContentManager from './components/ContentManager';
 import NotFoundPage from './components/NotFoundPage';
 import HomeTemplate from './templates/Home';
 import LoginTemplate from './templates/Login';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
 
 function RedirectOnToken() {
   const navigate = useNavigate();
+  const token = useSelector((state: RootState) => state.auth.token);  // Aqui o token é diretamente obtido
 
-  // Verificando o token e navegando para a rota - home:
   useEffect(() => {
-    const token = localStorage.getItem("tokenBeta");
-    if (token != null) {
-      navigate("/home");
+    if (token) { // Verificando se o token existe
+      navigate("/home");  // Redireciona para a página inicial
     }
-  }, [navigate]);
+  }, [token, navigate]);
 
-  return null;
+  return null;  // Componente não precisa renderizar nada
 }
 
 function App() {
   return (
     <Router>
-      <RedirectOnToken />
+      <RedirectOnToken />  {/* Componente de redirecionamento */}
       <Routes>
         <Route path="/" element={<LoginTemplate />} />
         <Route path="/home" element={<HomeTemplate />}>
