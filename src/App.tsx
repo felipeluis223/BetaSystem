@@ -24,7 +24,7 @@ function RedirectOnToken() {
 function App() {
   return (
     <Router>
-      {/* <RedirectOnToken />  Componente de redirecionamento */}
+      <RedirectOnToken /> {/*} Componente de redirecionamento */}
       <Routes>
         <Route path="/" element={<LoginTemplate />} />
         <Route path="/home" element={<HomeTemplate />}>
