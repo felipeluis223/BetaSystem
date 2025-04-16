@@ -15,7 +15,7 @@ export default function LoginTemplate (){
       if (token && window.location.pathname !== "/home") {
         navigate("/home");
       }
-    }, [token, navigate]);  // O useEffect só será chamado quando o token mudar
+    }, [token, navigate]);
 
     
     return (
