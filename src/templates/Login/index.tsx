@@ -9,7 +9,8 @@ import { useEffect } from "react";
 export default function LoginTemplate (){
     const navigate = useNavigate();
     const token = useSelector((state: RootState) => state.auth.token);  // Acessa o token do Redux
-  
+
+    console.log('token Template Login: ', token)
     useEffect(() => {
       // Verifica se o token existe e se a rota atual não é '/home'
       if (token && window.location.pathname !== "/home") {

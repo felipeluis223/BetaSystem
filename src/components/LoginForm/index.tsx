@@ -47,7 +47,7 @@ export default function LoginForm(){
             if(userToken != null){
                 
                 dispatch(setToken(userToken)); // Armazenando o token no estado da aplicação.
-                
+                console.log('userToken - Login: ', userToken)
                 // Zerando os valores - input do login:
                 setUserData({
                     email: "",
