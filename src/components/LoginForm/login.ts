@@ -17,7 +17,6 @@ const loginAPI = async (data:LoginData): Promise<string | null>=>{
         return token.data.token;
 
     }catch(e){
-        console.log('erro: ', e)
         return null;
     }
 

@@ -7,7 +7,6 @@ import { RootState } from "../../redux/store";
 function HomeTemplate() {
     const navigate = useNavigate();
     const token = useSelector((state: RootState) => state.auth.token);
-    console.log('token - Home: ', token)
     useEffect(() => {
         if (!token) {
             navigate("/");

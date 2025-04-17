@@ -20,8 +20,6 @@ export default function ContentManager({ route }: PropsRoute) {
 
   const api = async () => {
     const result = await contentAPI({ route });
-    console.log("API Result:", result);
-
     if (result) {
       setData(result); // Assume que result é PropsData[]
     }

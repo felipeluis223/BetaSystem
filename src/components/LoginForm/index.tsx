@@ -47,7 +47,7 @@ export default function LoginForm(){
             if(userToken != null){
                 
                 dispatch(setToken(userToken)); // Armazenando o token no estado da aplicação.
-                console.log('userToken - Login: ', userToken)
+
                 // Zerando os valores - input do login:
                 setUserData({
                     email: "",
@@ -62,7 +62,6 @@ export default function LoginForm(){
 
         }
         catch(e){
-            console.log('tivemos um erro: ',e);
             alert("Ocorreu um erro inesperado no servidor.");
         }
     };
