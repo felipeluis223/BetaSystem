@@ -2,15 +2,19 @@ import menuItems from "./data";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { BiExit } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearToken } from "../../redux/authSlice";
+import { jwtDecode } from 'jwt-decode';
 
 export default function HomeHeader() {
-    const nameMock: string = "Luis Felipe";
     const dispatch = useDispatch();
+
+    const token = useSelector((state: RootState) => state.auth.token);
+    const decodedToken: any = jwtDecode(token);
+    const nameMock: string = decodedToken?.name || null;
+
     const logout = ()=>{
-        const handleClearToken = dispatch(clearToken()); // Limpando o token da aplicação.
-        console.log('res: ',handleClearToken);
+        dispatch(clearToken()); // Limpando o token da aplicação.
     }
 
 
