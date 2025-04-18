@@ -10,6 +10,7 @@ function HomeTemplate() {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
+    
     const token = useSelector((state: RootState) => state.auth.token);
 
     useEffect(() => {

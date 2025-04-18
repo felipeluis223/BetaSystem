@@ -4,19 +4,29 @@ import { BiExit } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearToken } from "../../redux/authSlice";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode"; // Certifique-se de importar corretamente
 
 export default function HomeHeader() {
     const dispatch = useDispatch();
-
+    
+    // Obtém o token do Redux
     const token = useSelector((state: RootState) => state.auth.token);
-    const decodedToken: any = jwtDecode(token);
-    const nameMock: string = decodedToken?.name || null;
-
-    const logout = ()=>{
-        dispatch(clearToken()); // Limpando o token da aplicação.
+    
+    // Verifica se o token é válido antes de tentar decodificá-lo
+    let nameMock = "Usuário"; // Fallback caso o nome não esteja no token
+    if (token && typeof token === "string") {
+        try {
+            const decodedToken: any = jwtDecode(token); // Decodifica o token
+            nameMock = decodedToken?.name || "Usuário"; // Atribui o nome, se disponível
+        } catch (error) {
+            console.error("Erro ao decodificar o token:", error);
+        }
     }
 
+    // Função de logout que limpa o token
+    const logout = () => {
+        dispatch(clearToken()); // Limpando o token da aplicação.
+    };
 
     return (
         <header className="w-full bg-[#040404] flex flex-row justify-between shadow-md relative z-50">
@@ -51,10 +61,14 @@ export default function HomeHeader() {
                     ))}
                 </ul>
             </nav>
-                <button onClick={logout} className="w-[10%] text-[#ffffff] font-bold cursor-pointer text-md flex items-center gap-[10px] hover:text-[#22c55e] transition duration-200">
-                    Sair
-                    <BiExit className="text-[20px]" />
-                </button>
+
+            <button
+                onClick={logout}
+                className="w-[10%] text-[#ffffff] font-bold cursor-pointer text-md flex items-center gap-[10px] hover:text-[#22c55e] transition duration-200"
+            >
+                Sair
+                <BiExit className="text-[20px]" />
+            </button>
         </header>
     );
 }
