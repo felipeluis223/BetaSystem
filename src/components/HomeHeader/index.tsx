@@ -4,26 +4,26 @@ import { BiExit } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearToken } from "../../redux/authSlice";
-import { jwtDecode } from "jwt-decode"; // Certifique-se de importar corretamente
+import { jwtDecode } from "jwt-decode";
 
 export default function HomeHeader() {
     const dispatch = useDispatch();
     
-    // Obtém o token do Redux
+    // Obtém o token do Redux:
     const token = useSelector((state: RootState) => state.auth.token);
     
-    // Verifica se o token é válido antes de tentar decodificá-lo
-    let nameMock = "Usuário"; // Fallback caso o nome não esteja no token
+    // Verifica se o token é válido antes de tentar decodificá-lo:
+    let nameMock = "Usuário"; // Fallback caso o nome não esteja no token.
     if (token && typeof token === "string") {
         try {
-            const decodedToken: any = jwtDecode(token); // Decodifica o token
-            nameMock = decodedToken?.name || "Usuário"; // Atribui o nome, se disponível
+            const decodedToken: any = jwtDecode(token); // Decodifica o token.
+            nameMock = decodedToken?.name || "Usuário"; // Atribui o nome, se disponível.
         } catch (error) {
             console.error("Erro ao decodificar o token:", error);
         }
     }
 
-    // Função de logout que limpa o token
+    // Função de logout que limpa o token:
     const logout = () => {
         dispatch(clearToken()); // Limpando o token da aplicação.
     };
