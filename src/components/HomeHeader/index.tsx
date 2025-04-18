@@ -1,18 +1,27 @@
 import menuItems from "./data";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { BiExit } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearToken } from "../../redux/authSlice";
 
 export default function HomeHeader() {
     const nameMock: string = "Luis Felipe";
+    const dispatch = useDispatch();
+    const logout = ()=>{
+        const handleClearToken = dispatch(clearToken()); // Limpando o token da aplicação.
+        console.log('res: ',handleClearToken);
+    }
+
 
     return (
-        <header className="w-full h-[10%] bg-[#040404] flex flex-row justify-between shadow-md relative z-50">
-            <section className="w-[20%] h-[80px] flex items-center justify-center gap-[10px] font-bold text-white">
+        <header className="w-full bg-[#040404] flex flex-row justify-between shadow-md relative z-50">
+            <section className="w-[20%] h-[70px] flex items-center justify-center gap-[10px] font-bold text-white">
                 <IoPersonCircleOutline className="text-[2rem] text-[#ffffff]" />
                 <h3 className="text-lg text-[#22c55e]">{nameMock}</h3>
             </section>
 
-            <nav className="w-[65%] h-[80px] flex items-center">
+            <nav className="w-[55%] h-[70px] flex items-center">
                 <ul className="flex gap-6 text-white font-medium px-4 relative z-50">
                     {menuItems.map((menu) => (
                         <li key={menu.title} className="relative group">
@@ -38,6 +47,10 @@ export default function HomeHeader() {
                     ))}
                 </ul>
             </nav>
+                <button onClick={logout} className="w-[10%] text-[#ffffff] font-bold cursor-pointer text-md flex items-center gap-[10px] hover:text-[#22c55e] transition duration-200">
+                    Sair
+                    <BiExit className="text-[20px]" />
+                </button>
         </header>
     );
 }
