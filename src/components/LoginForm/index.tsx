@@ -36,10 +36,24 @@ export default function LoginForm() {
             [field]: value,
         }));
     };
+    
+    // Função chamada ao sucesso do login com o Google:
+    const handleGoogleSuccess = (credentialResponse: any) => {
+        try {
+            if (credentialResponse.credential) {
+                const decoded: any = jwtDecode(credentialResponse.credential);
+                console.log("Usuário Google:", decoded);
+                // Aqui você pode armazenar o token ou as informações do usuário
+                dispatch(setToken(credentialResponse.credential));
+                navigate("/home");
+            }
+        } catch (error) {
+            console.error("Erro ao decodificar o token do Google:", error);
+        }
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
         try {
             const userToken = await loginAPI({
                 email: userData.email,
@@ -62,11 +76,11 @@ export default function LoginForm() {
 
     return (
         <>
-            <section className="w-full md:w-[500px] h-[530px] rounded-[30px] flex flex-col container-form-login p-[15px]">
+            <section className="w-full md:w-[500px]  h-[530px] rounded-[30px] flex flex-col container-form-login p-[15px]">
                 <TitleLogin />
                 <SubTitleLogin />
 
-                <div className="w-full md:w-[80%] h-[200px]">
+                <div className="w-full h-[200px]">
                     <form className="w-full h-full flex flex-col gap-[15px]" onSubmit={handleSubmit}>
                         <EmailInput
                             value={userData.email}
@@ -93,9 +107,12 @@ export default function LoginForm() {
                     <hr className="text-[#d1d1d1]" />
 
                     <div className="w-full h-[100px] mt-[20px] flex flex-col text-center gap-[15px]">
-                        <p className="w-full h-[20px] text-[14px] text-[#808080]">Outras formas de realizar o login:</p>
-
-                        <OptionsButton />
+                        <div className="flex justify-center mt-[15px]">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}  // Chama a função handleGoogleSuccess no sucesso
+                                onError={() => console.log("Erro ao fazer login com o Google")}
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
