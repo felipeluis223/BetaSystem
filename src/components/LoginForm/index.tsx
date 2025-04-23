@@ -42,9 +42,10 @@ export default function LoginForm() {
         try {
             if (credentialResponse.credential) {
                 const decoded: any = jwtDecode(credentialResponse.credential);
-                console.log("Usuário Google:", decoded);
+                // console.log("Usuário Google:", decoded);
                 // Aqui você pode armazenar o token ou as informações do usuário
                 dispatch(setToken(credentialResponse.credential));
+                console.log('token: ', credentialResponse.credential)
                 navigate("/home");
             }
         } catch (error) {
