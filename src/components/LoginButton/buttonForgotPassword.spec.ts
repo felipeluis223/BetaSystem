@@ -1,4 +1,5 @@
 // src/components/Buttons.test.tsx
+import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ForgotPassword from './';
