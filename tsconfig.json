@@ -11,7 +11,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx",
+    "jsx": "react-jsx", // ou "react" para versões anteriores ao React 17
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",

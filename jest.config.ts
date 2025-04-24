@@ -5,16 +5,13 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      tsconfig: '<rootDir>/tsconfig.json', // ou tsconfig.app.json se for separado
+    }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.json', // ou tsconfig.app.json se for separado
-    },
-  },
 };
 
 export default config;
