@@ -1,74 +1,101 @@
-import menuItems from "./data";
+import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, Box, IconButton } from "@mui/material";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { BiExit } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearToken } from "../../redux/authSlice";
 import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
+import menuItems from "./data";
 
 export default function HomeHeader() {
     const dispatch = useDispatch();
-    
-    // Obtém o token do Redux:
     const token = useSelector((state: RootState) => state.auth.token);
-    
-    // Verifica se o token é válido antes de tentar decodificá-lo:
-    let nameMock = "Usuário"; // Fallback caso o nome não esteja no token.
+
+    let nameMock = "Usuário";
     if (token && typeof token === "string") {
         try {
-            const decodedToken: any = jwtDecode(token); // Decodifica o token.
-            nameMock = decodedToken?.name || "Usuário"; // Atribui o nome, se disponível.
+            const decodedToken: any = jwtDecode(token);
+            nameMock = decodedToken?.name || "Usuário";
         } catch (error) {
             console.error("Erro ao decodificar o token:", error);
         }
     }
 
-    // Função de logout que limpa o token:
     const logout = () => {
-        dispatch(clearToken()); // Limpando o token da aplicação.
+        dispatch(clearToken());
+    };
+
+    // Controle dos submenus
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [subMenuItems, setSubMenuItems] = useState<{ name: string, route: string }[]>([]);
+
+    const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>, children: any[]) => {
+        setAnchorEl(event.currentTarget);
+        setSubMenuItems(children);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        setSubMenuItems([]);
     };
 
     return (
-        <header className="w-full bg-[#040404] flex flex-row justify-between shadow-md relative z-50">
-            <section className="w-[20%] h-[70px] flex items-center justify-center gap-[10px] font-bold text-white">
-                <IoPersonCircleOutline className="text-[2rem] text-[#ffffff]" />
-                <h3 className="text-lg text-[#22c55e]">{nameMock}</h3>
-            </section>
+        <AppBar position="static" sx={{ backgroundColor: "#040404", boxShadow: 3, zIndex: 50 }}>
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+                
+                {/* Perfil */}
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <IoPersonCircleOutline size={32} color="#ffffff" />
+                    <Typography variant="h6" sx={{ color: "#22c55e", fontWeight: "bold" }}>
+                        {nameMock}
+                    </Typography>
+                </Box>
 
-            <nav className="w-[55%] h-[70px] flex items-center">
-                <ul className="flex gap-6 text-white font-medium px-4 relative z-50">
+                {/* Menu de Navegação */}
+                <Box sx={{ display: "flex", gap: 2 }}>
                     {menuItems.map((menu) => (
-                        <li key={menu.title} className="relative group">
-                            <button className="cursor-pointer hover:text-[#22c55e] transition duration-200">
+                        <div key={menu.title}>
+                            <Button
+                                onClick={(e) => handleMenuOpen(e, menu.children)}
+                                sx={{ color: "#ffffff", fontWeight: "500", "&:hover": { color: "#22c55e" } }}
+                            >
                                 {menu.title}
-                            </button>
-
-                            {menu.children.length > 0 && (
-                                <ul className="absolute top-full left-0 hidden group-hover:flex flex-col bg-[#1f1f1f] text-sm p-2 rounded shadow-lg w-48 z-40 transform group-hover:translate-y-1 transition-all duration-150">
-                                    {menu.children.map((subitem) => (
-                                        <li key={subitem.route}>
-                                            <Link
-                                                to={subitem.route}
-                                                className="block py-1 px-2 hover:bg-[#16a34a] cursor-pointer rounded"
-                                            >
-                                                {subitem.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </li>
+                            </Button>
+                        </div>
                     ))}
-                </ul>
-            </nav>
+                </Box>
 
-            <button
-                onClick={logout}
-                className="w-[10%] text-[#ffffff] font-bold cursor-pointer text-md flex items-center gap-[10px] hover:text-[#22c55e] transition duration-200"
+                {/* Botão Logout */}
+                <Button
+                    onClick={logout}
+                    sx={{ color: "#ffffff", fontWeight: "bold", display: "flex", gap: 1, "&:hover": { color: "#22c55e" } }}
+                >
+                    Sair
+                    <BiExit size={20} />
+                </Button>
+            </Toolbar>
+
+            {/* Submenu */}
+            <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+                MenuListProps={{ onMouseLeave: handleMenuClose }}
+                sx={{ mt: 1 }}
             >
-                Sair
-                <BiExit className="text-[20px]" />
-            </button>
-        </header>
+                {subMenuItems.map((subitem) => (
+                    <MenuItem
+                        key={subitem.route}
+                        component={Link}
+                        to={subitem.route}
+                        onClick={handleMenuClose}
+                        sx={{ "&:hover": { backgroundColor: "#16a34a", color: "#fff" } }}
+                    >
+                        {subitem.name}
+                    </MenuItem>
+                ))}
+            </Menu>
+        </AppBar>
     );
 }
