@@ -11,6 +11,7 @@ interface ContentData {
 const contentAPI = async ({ route }: ContentData): Promise<string[] | null> => {
     try {
         const response = await apiBeta.get<ContentResponse>(`${route}`);
+        console.log('res: ', response);
         return response.data;
     } catch (e) {
         // .log("error: ", e);
