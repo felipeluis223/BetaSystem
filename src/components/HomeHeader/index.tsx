@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, Box, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, Box } from "@mui/material";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { BiExit } from "react-icons/bi";
 import { Link } from "react-router-dom";

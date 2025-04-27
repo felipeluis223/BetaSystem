@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TitleLogin, SubTitleLogin } from "../LoginTitle";
-import { LoginButton, OptionsButton, ForgotPassword } from "../LoginButton";
+import { LoginButton, ForgotPassword } from "../LoginButton";
 import { EmailInput } from "../LoginEntryEmail";
 import { PasswordInput } from "../LoginInputPassword";
 import { RegisterAccountButton } from "../RegisterAccountButton";
@@ -13,7 +13,7 @@ import { setToken } from "../../redux/authSlice";
 
 // Google Login
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
+import apiBeta from "../../services/betaAPI";
 
 type UserData = {
     email: string;
@@ -36,20 +36,31 @@ export default function LoginForm() {
             [field]: value,
         }));
     };
-    
-    // Função chamada ao sucesso do login com o Google:
-    const handleGoogleSuccess = (credentialResponse: any) => {
+
+    const handleGoogleSuccess = async (credentialResponse: any) => {
         try {
             if (credentialResponse.credential) {
-                const decoded: any = jwtDecode(credentialResponse.credential);
-                // console.log("Usuário Google:", decoded);
-                // Aqui você pode armazenar o token ou as informações do usuário
-                dispatch(setToken(credentialResponse.credential));
-                console.log('token: ', credentialResponse.credential)
+            // Enviar o token do Google para o backend usando axios:
+            const response = await apiBeta.post("/auth/google", {
+                token: credentialResponse.credential
+            });
+
+            // Verificar se o backend retornou o JWT:
+            if (response.data.token) {
+
+                // Armazenar o token JWT retornado pelo backend:
+                dispatch(setToken(response.data.token));
+
+                // Redirecionar para a página inicial ou outra página
                 navigate("/home");
+
+                console.log('Token do sistema: ', response.data.token);
+            } else {
+                console.error("Erro ao autenticar no backend.");
+            }
             }
         } catch (error) {
-            console.error("Erro ao decodificar o token do Google:", error);
+            console.error("Erro ao realizar login com o Google:", error);
         }
     };
 
