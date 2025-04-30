@@ -22,7 +22,7 @@ interface RegisterData {
 const registerAPI = async (data: RegisterData): Promise<AxiosResponse<RegisterResponse> | null> => {
     try {
         const response = await apiBeta.post<RegisterResponse>("/users", data);
-        return response
+        return response;
     } catch (error) {
         return error;
     }

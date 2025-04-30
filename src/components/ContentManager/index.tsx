@@ -24,9 +24,12 @@ export default function ContentManager({ route }: PropsRoute) {
 
   const api = async () => {
     const result = await contentAPI({ route });
+
+    // Tenho que realizar o tratamento de erro caso venha vazio... Back-end.
     if (result) {
       setData(result);
     }
+    
   };
 
   const handleDelete = (id: string) => {
@@ -56,7 +59,7 @@ export default function ContentManager({ route }: PropsRoute) {
       </Button>
 
       {showModal && selectedUser && (
-        <ContentModal key={selectedUser.id} onClose={closeModal} />
+        <ContentModal key={selectedUser.id} selectedUser={selectedUser} onClose={closeModal} />
       )}
 
       {!showModal && data.length > 0 && (
