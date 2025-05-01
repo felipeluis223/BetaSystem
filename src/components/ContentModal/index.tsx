@@ -5,7 +5,11 @@ import { NameInput } from "../RegisterAccountName";
 import updateData from "./updateData";
 
 type RegisterUserModalProps = {
-    ononClose: () => void;
+    onClose: () => void;
+    selectedUser: {
+        name: string;
+        email: string;
+    };
 };
 
 type RegisterDataProps = {
@@ -14,7 +18,10 @@ type RegisterDataProps = {
 };
 
 export default function ContentModal({ onClose, selectedUser }: RegisterUserModalProps) {
-    const [userData, setUserData] = useState<RegisterDataProps>({ email: selectedUser.email, name: selectedUser.name });
+    const [userData, setUserData] = useState<RegisterDataProps>({
+        name: selectedUser.name,
+        email: selectedUser.email,
+    });
 
     const handleChange = (field: string, value: string) => {
         setUserData(prevData => ({
@@ -23,18 +30,28 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
         }));
     };
 
-    const handleRegisterData = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleUpdateData = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             const response = await updateData({
-                // Criar lógica para aplicar em diversos conteúdos sem quebrar aplicação.
-            })
-            onClose(); // Fecha o modal após a atualização.
+                type: "user",
+                data: {
+                    name: userData.name,
+                    email: userData.email,
+                },
+            });
+
+            if (response?.error) {
+                alert(response.error);
+                return;
+            }
+
+            onClose(); // Fecha o modal após a atualização
         } catch (error) {
             alert("Ocorreu um erro inesperado no servidor.");
         }
     };
-    
+
     return (
         <section className="modal-overlay">
             <div className="modal-content w-[500px] h-[320px] bg-[#f1f1f1] p-[20px] rounded-[10px]">
@@ -50,17 +67,17 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
                 </span>
 
                 <form
-                    onSubmit={handleRegisterData}
+                    onSubmit={handleUpdateData}
                     className="w-full modal-form h-[350px] flex items-center flex-col gap-[15px] mt-[25px]"
                 >
                     <NameInput
                         placeholder=""
-                        value={userData.name} 
+                        value={userData.name}
                         onChange={value => handleChange("name", value)}
                     />
-                    <EmailInput 
-                        value={userData.email} 
-                        onChange={value => handleChange("email", value)} 
+                    <EmailInput
+                        value={userData.email}
+                        onChange={value => handleChange("email", value)}
                     />
 
                     <button

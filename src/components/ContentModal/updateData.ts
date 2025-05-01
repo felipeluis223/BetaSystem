@@ -2,7 +2,7 @@ import apiBeta from "../../services/betaAPI";
 
 type PayloadType =   
   | { type: 'user'; data: { name: string; email: string } }
-  | { type: 'employee'; data: { name: string; email: string; phone: string; address?: string } }; // O employee ainda não está no backend.
+  | { type: 'employee'; data: { name: string; email: string; phone: string; address?: string } }; // Futuro suporte a 'employee'
 
 function handlePayload(payload: PayloadType) {
   if (payload.type === 'user') {
@@ -14,10 +14,8 @@ function handlePayload(payload: PayloadType) {
 
 const updateData = async (payload: PayloadType) => {
   try {
-    // Exemplo: você pode mudar a rota dependendo do tipo
     const endpoint = payload.type === 'user' ? "/users" : "/employees";
 
-    // Como ainda não há endpoint de employee, evite chamar API nesse caso
     if (payload.type === 'employee') {
       console.warn("Endpoint de employee ainda não está disponível.");
       return { error: "Endpoint de employee não implementado." };
@@ -26,7 +24,7 @@ const updateData = async (payload: PayloadType) => {
     const response = await apiBeta.put(endpoint, payload.data);
     return response;
   } catch (error) {
-    return error;
+    return { error: "Erro ao conectar com o servidor." };
   }
 };
 
