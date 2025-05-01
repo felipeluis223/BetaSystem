@@ -7,18 +7,21 @@ import updateData from "./updateData";
 type RegisterUserModalProps = {
     onClose: () => void;
     selectedUser: {
+        id: string;
         name: string;
         email: string;
     };
 };
 
 type RegisterDataProps = {
+    id: string;
     name: string;
     email: string;
 };
 
 export default function ContentModal({ onClose, selectedUser }: RegisterUserModalProps) {
     const [userData, setUserData] = useState<RegisterDataProps>({
+        id: selectedUser.id,
         name: selectedUser.name,
         email: selectedUser.email,
     });
@@ -36,6 +39,7 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
             const response = await updateData({
                 type: "user",
                 data: {
+                    id: userData.id,
                     name: userData.name,
                     email: userData.email,
                 },
