@@ -50,7 +50,7 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
                 return;
             }
 
-            onClose(); // Fecha o modal após a atualização
+            onClose(); // Fecha o modal após a atualização.
         } catch (error) {
             alert("Ocorreu um erro inesperado no servidor.");
         }
