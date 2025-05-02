@@ -40,24 +40,22 @@ export default function LoginForm() {
     const handleGoogleSuccess = async (credentialResponse: any) => {
         try {
             if (credentialResponse.credential) {
-            // Enviar o token do Google para o backend usando axios:
-            const response = await apiBeta.post("/auth/google", {
-                token: credentialResponse.credential
-            });
+                // Enviar o token do Google para o backend usando axios:
+                const response = await apiBeta.post("/auth/google", {
+                    token: credentialResponse.credential
+                });
 
-            // Verificar se o backend retornou o JWT:
-            if (response.data.token) {
+                // Verificar se o backend retornou o JWT:
+                if (response.data.token) {
 
-                // Armazenar o token JWT retornado pelo backend:
-                dispatch(setToken(response.data.token));
+                    // Armazenar o token JWT retornado pelo backend:
+                    dispatch(setToken(response.data.token));
 
-                // Redirecionar para a página inicial ou outra página
-                navigate("/home");
-
-                console.log('Token do sistema: ', response.data.token);
-            } else {
-                console.error("Erro ao autenticar no backend.");
-            }
+                    // Redirecionar para a página inicial ou outra página
+                    navigate("/home");
+                } else {
+                    console.error("Erro ao autenticar no backend.");
+                }
             }
         } catch (error) {
             console.error("Erro ao realizar login com o Google:", error);

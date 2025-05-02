@@ -1,8 +1,23 @@
 import apiBeta from "../../services/betaAPI";
 
 type PayloadType =   
-  | { type: 'user'; data: { id: string, name: string; email: string } }
-  | { type: 'employee'; data: { name: string; email: string; phone: string; address?: string } }; // Futuro suporte a 'employee'
+  | { 
+      type: 'user'; 
+      data: { 
+        id: string, 
+        name: string; 
+        email: string 
+      } 
+    }
+  | { 
+      type: 'employee'; 
+      data: { 
+        name: string; 
+        email: string; 
+        phone: string; 
+        address?: string 
+      } 
+    };
 
 const updateData = async (payload: PayloadType) => {
   try {
@@ -17,8 +32,8 @@ const updateData = async (payload: PayloadType) => {
     }
 
     const response = await apiBeta.put(endpoint[payload.type], payload.data);
-    console.log(response);
     return response;
+    
   } catch (error) {
     return { error: "Erro ao conectar com o servidor." };
   }

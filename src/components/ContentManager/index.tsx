@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import contentAPI from "./content";
 import ContentModal from "../ContentModal";
@@ -23,6 +23,7 @@ export default function ContentManager({ route }: PropsRoute) {
   const [data, setData] = useState<PropsData[]>([]);
 
   const api = async () => {
+    console.log('chamou a api...')
     const result = await contentAPI({ route });
 
     // Tenho que realizar o tratamento de erro caso venha vazio... Back-end.
@@ -31,6 +32,10 @@ export default function ContentManager({ route }: PropsRoute) {
     }
     
   };
+
+  useEffect(()=>{
+    api();
+  },[]);
 
   const handleDelete = (id: string) => {
     const confirmDelete = window.confirm("Tem certeza que deseja excluir este usuário?");
@@ -54,10 +59,6 @@ export default function ContentManager({ route }: PropsRoute) {
 
   return (
     <section style={{ padding: "2rem" }}>
-      <Button variant="contained" color="primary" onClick={api}>
-        Buscar Dados
-      </Button>
-
       {showModal && selectedUser && (
         <ContentModal key={selectedUser.id} selectedUser={selectedUser} onClose={closeModal} />
       )}
