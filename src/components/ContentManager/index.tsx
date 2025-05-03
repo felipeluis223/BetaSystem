@@ -1,20 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button } from "@mui/material";
 import contentAPI from "./content";
 import ContentModal from "../ContentModal";
 import ContentTable from "./table";
+import { handleDelete, handleUpdate } from "./contentHandlers";
+import { PropsData } from "./types";
 
 interface PropsRoute {
   route: string;
-}
-
-interface PropsData {
-  createdAt: string;
-  email: string;
-  password: string;
-  updatedAt: string;
-  id: string;
-  name: string;
 }
 
 export default function ContentManager({ route }: PropsRoute) {
@@ -23,34 +15,18 @@ export default function ContentManager({ route }: PropsRoute) {
   const [data, setData] = useState<PropsData[]>([]);
 
   const api = async () => {
-    console.log('chamou a api...')
+    console.log("chamou a api...");
     const result = await contentAPI({ route });
 
-    // Tenho que realizar o tratamento de erro caso venha vazio... Back-end.
+    // Tratamento de erro caso venha vazio (idealmente melhorar no back-end)
     if (result) {
       setData(result);
     }
-    
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     api();
-  },[showModal]);
-
-  const handleDelete = (id: string) => {
-    const confirmDelete = window.confirm("Tem certeza que deseja excluir este usuário?");
-    if (confirmDelete) {
-      setData((prevData) => prevData.filter((user) => user.id !== id));
-    }
-  };
-
-  const handleUpdate = (id: string) => {
-    const userToUpdate = data.find((user) => user.id === id);
-    if (userToUpdate) {
-      setSelectedUser(userToUpdate);
-      setShowModal(true);
-    }
-  };
+  }, [showModal]);
 
   const closeModal = () => {
     setShowModal(false);
@@ -60,11 +36,21 @@ export default function ContentManager({ route }: PropsRoute) {
   return (
     <section style={{ padding: "2rem" }}>
       {showModal && selectedUser && (
-        <ContentModal key={selectedUser.id} selectedUser={selectedUser} onClose={closeModal} />
+        <ContentModal
+          key={selectedUser.id}
+          selectedUser={selectedUser}
+          onClose={closeModal}
+        />
       )}
 
       {!showModal && data.length > 0 && (
-        <ContentTable data={data} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+        <ContentTable
+          data={data}
+          handleDelete={(id) => handleDelete(id, setData)}
+          handleUpdate={(id) =>
+            handleUpdate(id, data, setSelectedUser, setShowModal)
+          }
+        />
       )}
     </section>
   );
