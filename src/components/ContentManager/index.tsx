@@ -35,7 +35,7 @@ export default function ContentManager({ route }: PropsRoute) {
 
   useEffect(()=>{
     api();
-  },[]);
+  },[showModal]);
 
   const handleDelete = (id: string) => {
     const confirmDelete = window.confirm("Tem certeza que deseja excluir este usuário?");
