@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import contentAPI from "./content";
+import contentAPI from "../../services/getContentTable";
 import ContentModal from "../ContentModal";
 import ContentTable from "./table";
-import { handleDelete, handleUpdate } from "./contentHandlers";
-import { PropsData } from "./types";
+import { handleDelete } from "./contentHandlerDelete";
+import { PropsData } from "../../services/types";
+import { handleUpdate } from "./contentHandlerUpdate";
 
 interface PropsRoute {
   route: string;
@@ -18,7 +19,7 @@ export default function ContentManager({ route }: PropsRoute) {
     console.log("chamou a api...");
     const result = await contentAPI({ route });
 
-    // Tratamento de erro caso venha vazio (idealmente melhorar no back-end)
+    // Tratamento de erro caso venha vazio (idealmente melhorar no back-end):
     if (result) {
       setData(result);
     }
@@ -46,7 +47,7 @@ export default function ContentManager({ route }: PropsRoute) {
       {!showModal && data.length > 0 && (
         <ContentTable
           data={data}
-          handleDelete={(id) => handleDelete(id, setData)}
+          handleDelete={(id) => handleDelete(id, route, setData)}
           handleUpdate={(id) =>
             handleUpdate(id, data, setSelectedUser, setShowModal)
           }

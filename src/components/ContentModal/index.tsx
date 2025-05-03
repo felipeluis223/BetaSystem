@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { EmailInput } from "../LoginEntryEmail";
 import { NameInput } from "../RegisterAccountName";
-import updateData from "./updateData";
+import updateData from "../../services/userDataUpdate";
 
 type RegisterUserModalProps = {
     onClose: () => void;
