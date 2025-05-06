@@ -28,7 +28,7 @@ export default function ContentManager({ route, title }: PropsRoute) {
 
   useEffect(() => {
     api();
-  }, [showModal]);
+  }, [showModal, route]);
 
   const closeModal = () => {
     setShowModal(false);
@@ -37,6 +37,7 @@ export default function ContentManager({ route, title }: PropsRoute) {
 
   return (
     <section style={{ padding: "2rem" }}>
+      <h3 className="w-full h-[80px] text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
       {showModal && selectedUser && (
         <ContentModal
           key={selectedUser.id}
