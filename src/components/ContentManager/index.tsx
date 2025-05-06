@@ -6,6 +6,7 @@ import { handleDelete } from "./contentHandlerDelete";
 import { PropsData } from "../../services/types";
 import { handleUpdate } from "./contentHandlerUpdate";
 import ContentMessage from "../ContentMessage";
+import ContentButton from "../ContentButton";
 
 interface PropsRoute {
   route: string;
@@ -23,7 +24,8 @@ export default function ContentManager({ route, title }: PropsRoute) {
     // Tratamento de erro caso venha vazio (idealmente melhorar no back-end):
     if (response) {
       setData(response);
-    }
+    };
+    
   };
 
   useEffect(() => {
@@ -37,7 +39,13 @@ export default function ContentManager({ route, title }: PropsRoute) {
 
   return (
     <section style={{ padding: "2rem" }}>
-      <h3 className="w-full h-[80px] text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
+      <div className="w-full h-[80px] flex justify-between">
+        <h3 className="w-[50%] h-full text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
+        <ContentButton />
+      </div>
+
+
+      
       {showModal && selectedUser && (
         <ContentModal
           key={selectedUser.id}

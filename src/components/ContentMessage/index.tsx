@@ -1,6 +1,6 @@
 interface PropsMessage {
     message: string;
-}
+};
 
 export default function ContentMessage({ message }: PropsMessage){
     return (
@@ -8,4 +8,4 @@ export default function ContentMessage({ message }: PropsMessage){
             {message}
         </h3>
     )
-}
+};
