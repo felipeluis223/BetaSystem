@@ -16,7 +16,6 @@ export default function HomeHeader() {
     if (token && typeof token === "string") {
         try {
             const decodedToken: any = jwtDecode(token);
-            console.log('dados: ', decodedToken);
             nameMock = decodedToken?.name || "Usuário";
         } catch (error) {
             console.error("Erro ao decodificar o token:", error);

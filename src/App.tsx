@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ContentManager from './components/ContentManager';
 import NotFoundPage from './components/NotFoundPage';

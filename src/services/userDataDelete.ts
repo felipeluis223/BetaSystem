@@ -6,7 +6,6 @@ type DeletePayload = {
 };
 
 const deleteData = async ({ type, id }: DeletePayload) => {
-  console.log('ID:', id)
   try {
     const endpoint = {
       user: "/users",

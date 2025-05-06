@@ -5,6 +5,7 @@ import ContentTable from "./table";
 import { handleDelete } from "./contentHandlerDelete";
 import { PropsData } from "../../services/types";
 import { handleUpdate } from "./contentHandlerUpdate";
+import ContentMessage from "../ContentMessage";
 
 interface PropsRoute {
   route: string;
@@ -16,7 +17,6 @@ export default function ContentManager({ route }: PropsRoute) {
   const [data, setData] = useState<PropsData[]>([]);
 
   const api = async () => {
-    console.log("chamou a api...");
     const result = await contentAPI({ route });
 
     // Tratamento de erro caso venha vazio (idealmente melhorar no back-end):
@@ -44,6 +44,10 @@ export default function ContentManager({ route }: PropsRoute) {
         />
       )}
 
+      {
+        data.length === 0 && <ContentMessage message="Não temos registros na base de dados." />
+      }
+      
       {!showModal && data.length > 0 && (
         <ContentTable
           data={data}
