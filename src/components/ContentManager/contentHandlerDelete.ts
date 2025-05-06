@@ -1,5 +1,6 @@
 import { PropsData } from "../../services/types";
 import deleteData from "../../services/userDataDelete"; 
+import routeType from "../../utils/routeType";
 
 export const handleDelete = async (
   id: string,
@@ -11,7 +12,8 @@ export const handleDelete = async (
 
   try {
     // Mapeamento mais flexível para determinar o tipo de dado:
-    const type = route.includes("user") ? "user" : route.includes("employee") ? "employee" : null;
+    const type = routeType({ describle: route });
+
     if (!type) {
       alert("Tipo de dado desconhecido.");
       return;

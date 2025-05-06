@@ -1,5 +1,5 @@
 interface PropsMessage {
-    message: string
+    message: string;
 }
 
 export default function ContentMessage({ message }: PropsMessage){

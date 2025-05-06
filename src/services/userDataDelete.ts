@@ -7,19 +7,14 @@ type DeletePayload = {
 
 const deleteData = async ({ type, id }: DeletePayload) => {
   try {
-    const endpoint = {
-      user: "/users",
-      employee: "/employees"
-    };
-
     // Se quiser bloquear employee como no update:
     if (type === 'employee') {
       console.warn("Endpoint de employee ainda não está disponível.");
       return { error: "Endpoint de employee não implementado." };
     }
 
-    console.log(endpoint[type])
-    const response = await apiBeta.delete(`${endpoint[type]}/${id}`);
+    // console.log(endpoint[type])
+    const response = await apiBeta.delete(`/${type}/${id}`);
     return response;
 
   } catch (error) {

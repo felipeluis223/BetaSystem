@@ -9,19 +9,20 @@ import ContentMessage from "../ContentMessage";
 
 interface PropsRoute {
   route: string;
+  title: string;
 }
 
-export default function ContentManager({ route }: PropsRoute) {
+export default function ContentManager({ route, title }: PropsRoute) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<PropsData | null>(null);
   const [data, setData] = useState<PropsData[]>([]);
 
   const api = async () => {
-    const result = await contentAPI({ route });
+    const response = await contentAPI({ route });
 
     // Tratamento de erro caso venha vazio (idealmente melhorar no back-end):
-    if (result) {
-      setData(result);
+    if (response) {
+      setData(response);
     }
   };
 
