@@ -30,9 +30,9 @@ import {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell><strong>ID</strong></TableCell>
               <TableCell><strong>Nome</strong></TableCell>
               <TableCell><strong>Email</strong></TableCell>
-              <TableCell><strong>ID</strong></TableCell>
               <TableCell><strong>Criado em</strong></TableCell>
               <TableCell><strong>Atualizado em</strong></TableCell>
               <TableCell><strong>Ações</strong></TableCell>
@@ -41,9 +41,9 @@ import {
           <TableBody>
             {data.map((user) => (
               <TableRow key={user.id}>
+                <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.id}</TableCell>
                 <TableCell>{new Date(user.createdAt).toLocaleString()}</TableCell>
                 <TableCell>{new Date(user.updatedAt).toLocaleString()}</TableCell>
                 <TableCell>
