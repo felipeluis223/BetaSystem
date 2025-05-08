@@ -11,9 +11,10 @@ import ContentButton from "../ContentButton";
 interface PropsRoute {
   route: string;
   title: string;
+  describle: string;
 }
 
-export default function ContentManager({ route, title }: PropsRoute) {
+export default function ContentManager({ route, title, describle }: PropsRoute) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<PropsData | null>(null);
   const [data, setData] = useState<PropsData[]>([]);
@@ -40,7 +41,10 @@ export default function ContentManager({ route, title }: PropsRoute) {
   return (
     <section style={{ padding: "2rem" }}>
       <div className="w-full h-[80px] flex justify-between">
-        <h3 className="w-[50%] h-full text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
+        <div className="w-[50%] h-full bg-[red]">
+          <h3 className="text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
+          <span className="text-[16px] text-[#808080]">{describle}</span>
+        </div>
         <ContentButton />
       </div>
 
