@@ -42,7 +42,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   return (
     <section style={{ padding: "2rem" }}>
       <div className="w-full h-[80px] flex justify-between items-start mb-4">
-        <div className="w-[50%]">
+        <div className="w-[70%]">
           <h3 className="text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
           <span className="text-[16px] text-[#808080]">{describle}</span>
         </div>

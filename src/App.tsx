@@ -10,12 +10,12 @@ function App() {
     employee: {
       route: "employees",
       title: "Funcionários",
-      describle: "Registros de funcionário cadastrados na base de dados."
+      describle: "Lista completa dos funcionários cadastrados, contendo todos os registros disponíveis atualmente na base de dados."
     },
     user: {
       route: "users",
       title: "Usuários",
-      describle: "Registros de usuários cadastrados na base de dados."
+      describle: "Lista completa dos usuários cadastrados, contendo todos os registros disponíveis atualmente na base de dados."
     }
   };
 

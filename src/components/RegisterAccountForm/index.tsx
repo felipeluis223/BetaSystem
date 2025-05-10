@@ -3,7 +3,7 @@ import { MdClose } from "react-icons/md";
 import { EmailInput } from "../LoginEntryEmail";
 import { PasswordInput } from "../LoginInputPassword";
 import { NameInput } from "../RegisterAccountName";
-import registerAPI from "./register";
+import createUser from "../../services/api/post/users/createUser";
 
 type RegisterUserModalProps = {
     onClose: () => void;
@@ -35,7 +35,7 @@ export default function RegisterUserModal({ onClose }: RegisterUserModalProps) {
                 return;
             }
             // Obtendo as credenciais do usuário
-            const res = await registerAPI({
+            const res = await createUser({
                 "name": userData.name,
                 "email": userData.email,
                 "password": userData.password

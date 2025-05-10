@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import apiBeta from "../../services/betaAPI";
+import apiBeta from "../../../betaAPI";
 
 // Informações esperadas pelo retorno da API:
 interface RegisterResponse {
@@ -19,7 +19,7 @@ interface RegisterData {
 }
 
 // Rota de cadastro de usuário:
-const registerAPI = async (data: RegisterData): Promise<AxiosResponse<RegisterResponse> | null> => {
+const createUser = async (data: RegisterData): Promise<AxiosResponse<RegisterResponse> | null> => {
     try {
         const response = await apiBeta.post<RegisterResponse>("/users", data);
         return response;
@@ -28,4 +28,4 @@ const registerAPI = async (data: RegisterData): Promise<AxiosResponse<RegisterRe
     }
 };
 
-export default registerAPI;
+export default createUser;
