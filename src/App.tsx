@@ -5,6 +5,7 @@ import HomeTemplate from './templates/Home';
 import LoginTemplate from './templates/Login';
 
 function App() {
+  // Dados de configuração das rotas:
   const routeData = {
     employee: {
       route: "employees",
@@ -16,16 +17,18 @@ function App() {
       title: "Usuários",
       describle: "Registros de usuários cadastrados na base de dados."
     }
-  }
+  };
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LoginTemplate />} />
+        
         <Route path="/home" element={<HomeTemplate />}>
-          <Route path="funcionarios" element={<ContentManager route={routeData.employee.route} title={routeData.employee.title} describle={routeData.employee.describle} />} />
-          <Route path="usuarios" element={<ContentManager route={routeData.user.route} title={routeData.user.title} describle={routeData.user.describle} />} />
+          <Route path="funcionarios" element={<ContentManager {...routeData.employee} />} />
+          <Route path="usuarios" element={<ContentManager {...routeData.user} />} />
         </Route>
+        
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

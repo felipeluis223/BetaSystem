@@ -15,22 +15,23 @@ interface PropsRoute {
 }
 
 export default function ContentManager({ route, title, describle }: PropsRoute) {
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<PropsData | null>(null);
   const [data, setData] = useState<PropsData[]>([]);
 
-  const api = async () => {
+  // Busca dados da API com base na rota recebida via props
+  const fetchData = async () => {
     const response = await contentAPI({ route });
-
-    // Tratamento de erro caso venha vazio (idealmente melhorar no back-end):
     if (response) {
       setData(response);
-    };
-    
+    } else {
+      setData([]); // Garante limpeza da tabela se API falhar
+    }
   };
 
+  // Recarrega dados sempre que a rota muda ou o modal é fechado
   useEffect(() => {
-    api();
+    fetchData();
   }, [showModal, route]);
 
   const closeModal = () => {
@@ -40,16 +41,15 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
 
   return (
     <section style={{ padding: "2rem" }}>
-      <div className="w-full h-[80px] flex justify-between">
-        <div className="w-[50%] h-full bg-[red]">
+      <div className="w-full h-[80px] flex justify-between items-start mb-4">
+        <div className="w-[50%]">
           <h3 className="text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
           <span className="text-[16px] text-[#808080]">{describle}</span>
         </div>
         <ContentButton />
       </div>
 
-
-      
+      {/* Modal de edição */}
       {showModal && selectedUser && (
         <ContentModal
           key={selectedUser.id}
@@ -58,17 +58,17 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
         />
       )}
 
-      {
-        data.length === 0 && <ContentMessage message="Não temos registros na base de dados." />
-      }
-      
+      {/* Mensagem de dados vazios */}
+      {data.length === 0 && (
+        <ContentMessage message="Não temos registros na base de dados." />
+      )}
+
+      {/* Tabela de dados */}
       {!showModal && data.length > 0 && (
         <ContentTable
           data={data}
           handleDelete={(id) => handleDelete(id, route, setData)}
-          handleUpdate={(id) =>
-            handleUpdate(id, data, setSelectedUser, setShowModal)
-          }
+          handleUpdate={(id) => handleUpdate(id, data, setSelectedUser, setShowModal)}
         />
       )}
     </section>
