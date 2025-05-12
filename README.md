@@ -19,8 +19,10 @@ Este é o repositório do **Frontend do Beta**, uma aplicação web desenvolvida
 ```bash
 git clone https://github.com/seu-usuario/beta-frontend.git
 cd beta-frontend
+```
 
-2. **Instalando as dependências:**
+2. **Instalando as dependências do repositório e executando o projeto:**
 ```bash
 npm install
-
+npm run dev
+```

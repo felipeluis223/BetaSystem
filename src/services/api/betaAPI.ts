@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "../redux/store"; // Ajuste o caminho conforme a estrutura do seu projeto
+import store from "../../redux/store"; // Ajuste o caminho conforme a estrutura do seu projeto
 
 const apiBeta = axios.create({
     baseURL: import.meta.env.VITE_BETA_BASE_URL,

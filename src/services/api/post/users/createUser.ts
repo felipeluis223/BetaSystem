@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import apiBeta from "../../../betaAPI";
+import apiBeta from "../../betaAPI";
 
 // Informações esperadas pelo retorno da API:
 interface RegisterResponse {

@@ -1,4 +1,4 @@
-import apiBeta from "./betaAPI";
+import apiBeta from "./api/betaAPI";
 
 type PayloadType =   
   | { 

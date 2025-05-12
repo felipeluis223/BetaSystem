@@ -13,7 +13,7 @@ import { setToken } from "../../redux/authSlice";
 
 // Google Login
 import { GoogleLogin } from '@react-oauth/google';
-import apiBeta from "../../services/betaAPI";
+import apiBeta from "../../services/api/betaAPI";
 
 type UserData = {
     email: string;
