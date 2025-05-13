@@ -26,3 +26,9 @@ cd beta-frontend
 npm install
 npm run dev
 ```
+
+## 📁 Criar o arquivo ".env" na raiz do projeto
+```
+VITE_BETA_BASE_URL: Endereço base da API utilizada pelo backend
+VITE_GOOGLE_ID_CLIENT: Identificador do cliente usado para login com o Google (OAuth)
+```
