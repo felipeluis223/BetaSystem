@@ -27,8 +27,14 @@ npm install
 npm run dev
 ```
 
-## 📁 Criar o arquivo ".env" na raiz do projeto
+## 📁 Criar o arquivo ".env"
+Na raiz do projeto, crie um arquivo chamado .env contendo as variáveis de ambiente necessárias para o funcionamento da aplicação:
+
+- VITE_BETA_BASE_URL: URL da API - Back-end (https://github.com/felipeluis223/BetaAPI)
+- VITE_GOOGLE_ID_CLIENT: o identificador do cliente do Google Auth - (https://console.cloud.google.com/)
+
 ```
-VITE_BETA_BASE_URL: Endereço base da API utilizada pelo backend
-VITE_GOOGLE_ID_CLIENT: Identificador do cliente usado para login com o Google (OAuth)
+VITE_BETA_BASE_URL=https://sua-api-url.com
+VITE_GOOGLE_ID_CLIENT=seu-google-client-id
+
 ```
