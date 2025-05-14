@@ -1,4 +1,4 @@
-import apiBeta from "../../services/api/betaAPI";
+import apiBeta from "../../services/api/Beta/betaAPI";
 
 // Informações esperadas pelo retorno da API:
 interface LoginResponse {

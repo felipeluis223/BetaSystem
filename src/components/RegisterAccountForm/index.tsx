@@ -3,7 +3,7 @@ import { MdClose } from "react-icons/md";
 import { EmailInput } from "../LoginEntryEmail";
 import { PasswordInput } from "../LoginInputPassword";
 import { NameInput } from "../RegisterAccountName";
-import createUser from "../../services/api/post/users/createUser";
+import createUser from "../../services/api/Beta/post/users/createUser";
 
 type RegisterUserModalProps = {
     onClose: () => void;

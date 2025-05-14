@@ -1,5 +1,5 @@
 import { PropsData } from "../../services/types";
-import deleteData from "../../services/userDataDelete"; 
+import deleteData from "../../services/api/Beta/delete/users/userDataDelete"; 
 import routeType from "../../utils/routeType";
 
 export const handleDelete = async (

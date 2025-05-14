@@ -1,4 +1,4 @@
-import apiBeta from "./api/betaAPI";
+import apiBeta from "./api/Beta/betaAPI";
 
 interface ContentResponse {
     data: string[];
