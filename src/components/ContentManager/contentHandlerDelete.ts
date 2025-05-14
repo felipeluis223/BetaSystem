@@ -1,35 +1,32 @@
-import { PropsData } from "../../services/types";
 import deleteData from "../../services/api/Beta/delete/users/userDataDelete"; 
 import routeType from "../../utils/routeType";
 
 export const handleDelete = async (
   id: string,
-  route: string,
-  setData: React.Dispatch<React.SetStateAction<PropsData[]>>
-) => {
+  route: string
+): Promise<boolean> => {
   const confirmDelete = window.confirm("Tem certeza que deseja excluir este usuário?");
-  if (!confirmDelete) return;
+  if (!confirmDelete) return false;
 
   try {
-    // Mapeamento mais flexível para determinar o tipo de dado:
     const type = routeType({ describle: route });
 
     if (!type) {
       alert("Tipo de dado desconhecido.");
-      return;
+      return false;
     }
 
-    // Deleta o item:
     const response = await deleteData({ type, id });
 
     if (response?.status === 200) {
-      setData((prevData) => prevData.filter((user) => user.id !== id));
+      return true; // Sucesso
     } else {
       alert("Erro ao excluir usuário.");
+      return false;
     }
   } catch (error) {
     console.error(error);
     alert("Erro inesperado.");
+    return false;
   }
 };
-
