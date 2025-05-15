@@ -20,7 +20,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   const [data, setData] = useState<PropsData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Função para buscar dados da API:
+  // Função para buscar dados da API
   const fetchData = async () => {
     setLoading(true);
     const response = await contentAPI({ route });
@@ -32,7 +32,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
     setLoading(false);
   };
 
-  // Recarrega dados sempre que a rota muda ou o modal fecha:
+  // Recarrega dados sempre que a rota muda ou o modal fecha
   useEffect(() => {
     fetchData();
   }, [showModal, route]);
@@ -42,6 +42,11 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
     setSelectedUser(null);
   };
 
+  const openCreateModal = () => {
+    setSelectedUser(null); // Garante que é criação
+    setShowModal(true);
+  };
+
   return (
     <section style={{ padding: "2rem" }}>
       <div className="w-full h-[80px] flex justify-between items-start mb-4">
@@ -49,13 +54,13 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
           <h3 className="text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
           <span className="text-[16px] text-[#808080]">{describle}</span>
         </div>
-        <ContentButton />
+        <ContentButton onClick={openCreateModal} />
       </div>
 
-      {/* Modal de edição */}
-      {showModal && selectedUser && (
+      {/* Modal de criação/edição */}
+      {showModal && (
         <ContentModal
-          key={selectedUser.id}
+          key={selectedUser?.id || "new"}
           selectedUser={selectedUser}
           onClose={closeModal}
         />

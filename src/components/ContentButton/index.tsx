@@ -1,9 +1,14 @@
-export default function ContentButton (){
+interface ContentButtonProps {
+  onClick?: () => void;
+}
 
-    
-    return(
-        <button className="w-[200px] container-form-login h-[50px] bg-[#22c55e] rounded-[5px]">
-            <h3 className="font-bold cursor-pointer">Criar Novo</h3>
-        </button>
-    );
-};
+export default function ContentButton({ onClick }: ContentButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-[200px] container-form-login h-[50px] bg-[#22c55e] rounded-[5px]"
+    >
+      <h3 className="font-bold cursor-pointer text-white">Criar Novo</h3>
+    </button>
+  );
+}
