@@ -43,6 +43,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   };
 
   const openCreateModal = () => {
+    console.log('click');
     setSelectedUser(null); // Garante que é criação
     setShowModal(true);
   };

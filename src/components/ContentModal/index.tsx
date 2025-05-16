@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { EmailInput } from "../LoginEntryEmail";
 import { NameInput } from "../RegisterAccountName";
@@ -10,7 +10,7 @@ type RegisterUserModalProps = {
         id: string;
         name: string;
         email: string;
-    };
+    } | null; // <- permite que o pai envie null/undefined
 };
 
 type RegisterDataProps = {
@@ -21,10 +21,20 @@ type RegisterDataProps = {
 
 export default function ContentModal({ onClose, selectedUser }: RegisterUserModalProps) {
     const [userData, setUserData] = useState<RegisterDataProps>({
-        id: selectedUser.id,
-        name: selectedUser.name,
-        email: selectedUser.email,
+        id: "",
+        name: "",
+        email: "",
     });
+
+    useEffect(() => {
+        if (selectedUser) {
+            setUserData({
+                id: selectedUser.id,
+                name: selectedUser.name,
+                email: selectedUser.email,
+            });
+        }
+    }, [selectedUser]);
 
     const handleChange = (field: string, value: string) => {
         setUserData(prevData => ({
@@ -55,6 +65,8 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
             alert("Ocorreu um erro inesperado no servidor.");
         }
     };
+
+    if (!selectedUser) return null;
 
     return (
         <section className="modal-overlay">
