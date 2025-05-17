@@ -6,7 +6,7 @@ Este é o repositório do **Frontend do Beta**, uma aplicação web desenvolvida
 
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/) (se aplicável)
-- [Vite](https://vitejs.dev/) ou [Create React App](https://create-react-app.dev/)
+- [Vite](https://vitejs.dev/)
 - [Axios](https://axios-http.com/) para requisições HTTP
 - [React Router](https://reactrouter.com/) para rotas
 - [Redux Toolkit](https://redux-toolkit.js.org/) para gerenciamento de estado (se aplicável)
@@ -36,5 +36,5 @@ Na raiz do projeto, crie um arquivo chamado .env contendo as variáveis de ambie
 ```
 VITE_BETA_BASE_URL=https://sua-api-url.com
 VITE_GOOGLE_ID_CLIENT=seu-google-client-id
-
 ```
+
