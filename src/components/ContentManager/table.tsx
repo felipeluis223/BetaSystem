@@ -6,10 +6,11 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Button,
     Stack,
   } from "@mui/material";
   
+import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
+
   interface UserData {
     id: string;
     name: string;
@@ -46,22 +47,16 @@ import {
                 <TableCell>{new Date(user.updatedAt).toLocaleString()}</TableCell>
                 <TableCell>
                   <Stack direction="row" spacing={1}>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      size="small"
+                    <button
                       onClick={() => handleUpdate(user.id)}
-                    >
-                      Atualizar
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      size="small"
+                    >              
+                      <FaRegEdit className="w-[40px] h-[20px] text-[16px] cursor-pointer hover:text-[green]" />
+                    </button>
+                    <button
                       onClick={() => handleDelete(user.id)}
                     >
-                      Excluir
-                    </Button>
+                      <FaRegTrashAlt className="w-[40px] h-[20px] text-[16px] cursor-pointer hover:text-[red]" />
+                    </button>
                   </Stack>
                 </TableCell>
               </TableRow>
