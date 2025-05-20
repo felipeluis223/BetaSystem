@@ -59,7 +59,7 @@ export default function HomeHeader() {
                     [`& .MuiDrawer-paper`]: {
                         width: 290,
                         boxSizing: "border-box",
-                        backgroundColor: "#f2f2f2", // Azul escuro
+                        backgroundColor: "#f2f2f2",
                         color: "#000000",
                     },
                 }}

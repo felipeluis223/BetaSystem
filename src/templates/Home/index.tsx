@@ -39,9 +39,10 @@ function HomeTemplate() {
     }, [token, navigate, location, dispatch]);
 
     return (
-        <section className="w-full h-screen">
+        <section className="w-full h-screen flex flex-row">
             <HomeHeader />
-            <section className="w-full h-[90%]">
+
+            <section className="w-[70%] h-[90%]">
                 <Outlet />
             </section>
         </section>
