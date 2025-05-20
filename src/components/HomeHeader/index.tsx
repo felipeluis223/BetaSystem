@@ -96,10 +96,10 @@ export default function HomeHeader() {
                                                     key={child.route}
                                                     disablePadding
                                                     sx={{
-                                                        backgroundColor: isActive ? "#16a34a" : "transparent",
+                                                        backgroundColor: isActive ? "#f2f2f2" : "transparent",
                                                         color: isActive ? "#000000" : "#000000",
                                                         "&:hover": {
-                                                            backgroundColor: "#1e9d4c",
+                                                            backgroundColor: "#f2f2f2",
                                                             color: "#000000",
                                                         },
                                                     }}

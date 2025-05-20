@@ -66,6 +66,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
           onClose={closeModal}
         />
       )}
+      
 
       {/* Mensagens de carregamento ou ausência de dados */}
       {loading ? (
