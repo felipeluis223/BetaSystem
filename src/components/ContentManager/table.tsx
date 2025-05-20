@@ -30,7 +30,6 @@ import {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><strong>ID</strong></TableCell>
               <TableCell><strong>Nome</strong></TableCell>
               <TableCell><strong>Email</strong></TableCell>
               <TableCell><strong>Criado em</strong></TableCell>
@@ -41,7 +40,6 @@ import {
           <TableBody>
             {data.map((user) => (
               <TableRow key={user.id}>
-                <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{new Date(user.createdAt).toLocaleString()}</TableCell>
