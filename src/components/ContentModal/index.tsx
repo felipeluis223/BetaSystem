@@ -4,7 +4,7 @@ import updateData from "../../services/api/Beta/update/users/userDataUpdate";
 
 type RegisterUserModalProps = {
   onClose: () => void;
-  selectedUser: Record<string, any> | null; // Agora aceita qualquer objeto
+  selectedUser: Record<string, any> | null;
 };
 
 export default function ContentModal({ onClose, selectedUser }: RegisterUserModalProps) {
@@ -28,7 +28,7 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
 
     try {
       const response = await updateData({
-        type: "user", // ou "funcionario", se você quiser parametrizar isso também
+        type: "user",
         data: formData,
       });
 
@@ -37,7 +37,7 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
         return;
       }
 
-      onClose(); // Fecha o modal após sucesso
+      onClose();
     } catch (error) {
       alert("Ocorreu um erro inesperado no servidor.");
     }
@@ -46,12 +46,12 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
   if (!selectedUser) return null;
 
   return (
-    <section className="modal-overlay">
-      <div className="modal-content w-[500px] min-h-[350px] bg-[#f1f1f1] p-[20px] rounded-[10px]">
+    <section className="modal-overlay flex justify-center items-center fixed inset-0 bg-black bg-opacity-40 z-50">
+      <div className="modal-content w-full max-w-[600px] bg-[#f1f1f1] p-[20px] rounded-[10px]">
         <div className="w-full flex justify-between mb-[10px]">
           <h3 className="text-[1.2rem] font-bold">Formulário de edição</h3>
           <button className="cursor-pointer" onClick={onClose}>
-            <MdClose className="w-[80px] text-[1.5rem]" />
+            <MdClose className="text-[1.5rem]" />
           </button>
         </div>
 
@@ -61,10 +61,10 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
 
         <form
           onSubmit={handleUpdateData}
-          className="w-full modal-form flex flex-col gap-[15px] mt-[25px]"
+          className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mt-[25px]"
         >
           {Object.entries(formData).map(([key, value]) => (
-            <div key={key} className="flex flex-col w-full">
+            <div key={key} className="flex flex-col">
               <label className="text-sm font-medium mb-1 capitalize">{key}</label>
               {typeof value === "number" ? (
                 <input
@@ -91,12 +91,14 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
             </div>
           ))}
 
-          <button
-            type="submit"
-            className="w-[250px] h-[40px] bg-[#040404] text-[#f1f1f1] rounded-md cursor-pointer self-center"
-          >
-            <h2>Atualizar</h2>
-          </button>
+          <div className="col-span-full flex justify-center mt-2">
+            <button
+              type="submit"
+              className="w-[250px] h-[40px] bg-[#040404] text-[#f1f1f1] rounded-md cursor-pointer"
+            >
+              <h2>Atualizar</h2>
+            </button>
+          </div>
         </form>
       </div>
     </section>
