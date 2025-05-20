@@ -6,7 +6,7 @@ Este é o repositório do **Frontend do Beta**, uma aplicação web desenvolvida
 
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/) (se aplicável)
-- [Vite](https://vitejs.dev/)
+- [Vite](https://vitejs.dev/)j
 - [Axios](https://axios-http.com/) para requisições HTTP
 - [React Router](https://reactrouter.com/) para rotas
 - [Redux Toolkit](https://redux-toolkit.js.org/) para gerenciamento de estado (se aplicável)
