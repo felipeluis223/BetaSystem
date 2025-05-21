@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { MdClose } from "react-icons/md";
-import updateData from "../../services/api/Beta/update/users/userDataUpdate";
+import updateData from "../../services/api/Beta/update/dataUpdate";
 
-type RegisterUserModalProps = {
+type ContentModalProps = {
   onClose: () => void;
   selectedUser: Record<string, any> | null;
+  type: string; // "user", "produto", etc.
 };
 
-export default function ContentModal({ onClose, selectedUser }: RegisterUserModalProps) {
+export default function ContentModal({ onClose, selectedUser, type }: ContentModalProps) {
   const [formData, setFormData] = useState<Record<string, any>>({});
 
   useEffect(() => {
@@ -17,20 +18,14 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
   }, [selectedUser]);
 
   const handleChange = (key: string, value: any) => {
-    setFormData(prev => ({
-      ...prev,
-      [key]: value,
-    }));
+    setFormData(prev => ({ ...prev, [key]: value }));
   };
 
-  const handleUpdateData = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const response = await updateData({
-        type: "user",
-        data: formData,
-      });
+      const response = await updateData({ type, data: formData });
 
       if (response?.error) {
         alert(response.error);
@@ -49,8 +44,8 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
     <section className="modal-overlay flex justify-center items-center fixed inset-0 bg-black bg-opacity-40 z-50">
       <div className="modal-content w-full max-w-[600px] bg-[#f1f1f1] p-[20px] rounded-[10px]">
         <div className="w-full flex justify-between mb-[10px]">
-          <h3 className="text-[1.2rem] font-bold">Formulário de edição</h3>
-          <button className="cursor-pointer" onClick={onClose}>
+          <h3 className="text-[1.2rem] font-bold">Formulário de Edição</h3>
+          <button onClick={onClose} className="cursor-pointer">
             <MdClose className="text-[1.5rem]" />
           </button>
         </div>
@@ -60,7 +55,7 @@ export default function ContentModal({ onClose, selectedUser }: RegisterUserModa
         </span>
 
         <form
-          onSubmit={handleUpdateData}
+          onSubmit={handleSubmit}
           className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mt-[25px]"
         >
           {Object.entries(formData).map(([key, value]) => (

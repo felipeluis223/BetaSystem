@@ -16,7 +16,6 @@ interface ContentTableProps {
   handleDelete: (id: string) => void;
 }
 
-// Mapa de nomes legíveis para as colunas
 const columnLabels: Record<string, string> = {
   id: "ID",
   name: "Nome",
@@ -51,7 +50,7 @@ export default function ContentTable({
           {data.map((row) => (
             <TableRow key={row.id}>
               {tableHeaders.map((key) => (
-                <TableCell key={key}>
+                <TableCell key={`${row.id}-${key}`}>
                   {key.includes("At")
                     ? new Date(row[key]).toLocaleDateString("pt-BR")
                     : row[key]}

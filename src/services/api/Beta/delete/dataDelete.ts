@@ -1,4 +1,4 @@
-import apiBeta from "../../betaAPI";
+import apiBeta from "../betaAPI";
 
 type DeletePayload = {
   type: 'user' | 'employee';
@@ -7,13 +7,7 @@ type DeletePayload = {
 
 const deleteData = async ({ type, id }: DeletePayload) => {
   try {
-    // Se quiser bloquear employee como no update:
-    if (type === 'employee') {
-      console.warn("Endpoint de employee ainda não está disponível.");
-      return { error: "Endpoint de employee não implementado." };
-    }
-
-    // console.log(endpoint[type])
+    
     const response = await apiBeta.delete(`/${type}/${id}`);
     return response;
 

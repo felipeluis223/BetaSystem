@@ -1,4 +1,4 @@
-import deleteData from "../../services/api/Beta/delete/users/userDataDelete"; 
+import deleteData from "../../services/api/Beta/delete/dataDelete"; 
 import routeType from "../../utils/routeType";
 
 export const handleDelete = async (

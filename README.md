@@ -33,7 +33,7 @@ Na raiz do projeto, crie um arquivo chamado .env contendo as variáveis de ambie
 - VITE_BETA_BASE_URL: URL da API - Back-end (https://github.com/felipeluis223/BetaAPI)
 - VITE_GOOGLE_ID_CLIENT: o identificador do cliente do Google Auth - (https://console.cloud.google.com/)
 
-```
+```bash
 VITE_BETA_BASE_URL=https://sua-api-url.com
 VITE_GOOGLE_ID_CLIENT=seu-google-client-id
 ```

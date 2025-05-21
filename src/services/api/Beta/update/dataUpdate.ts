@@ -1,4 +1,4 @@
-import apiBeta from "../../betaAPI";
+import apiBeta from "../betaAPI";
 
 type PayloadType =   
   | { 
@@ -26,11 +26,7 @@ const updateData = async (payload: PayloadType) => {
       employee: "/employees"
     };
 
-    if (payload.type === 'employee') {
-      console.warn("Endpoint de employee ainda não está disponível.");
-      return { error: "Endpoint de employee não implementado." };
-    }
-
+    console.log(payload)
     const response = await apiBeta.put(endpoint[payload.type], payload.data);
     return response;
     

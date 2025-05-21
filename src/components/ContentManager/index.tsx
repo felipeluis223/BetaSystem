@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import contentAPI from "../../services/getContentTable";
-import ContentModal from "../ContentModal";
+import ContentModal from "../ContentModal"; // Modal genérico reutilizável
 import ContentTable from "./table";
 import { handleDelete } from "./contentHandlerDelete";
 import { PropsData } from "../../services/types";
@@ -19,20 +19,14 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   const [selectedUser, setSelectedUser] = useState<PropsData | null>(null);
   const [data, setData] = useState<PropsData[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Função para buscar dados da API
+  console.log(route)
   const fetchData = async () => {
     setLoading(true);
     const response = await contentAPI({ route });
-    if (response) {
-      setData(response);
-    } else {
-      setData([]);
-    }
+    setData(response || []);
     setLoading(false);
   };
 
-  // Recarrega dados sempre que a rota muda ou o modal fecha
   useEffect(() => {
     fetchData();
   }, [showModal, route]);
@@ -43,8 +37,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   };
 
   const openCreateModal = () => {
-    console.log('click');
-    setSelectedUser(null); // Garante que é criação
+    setSelectedUser(null); // Novo item
     setShowModal(true);
   };
 
@@ -58,17 +51,15 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
         <ContentButton onClick={openCreateModal} />
       </div>
 
-      {/* Modal de criação/edição */}
       {showModal && (
         <ContentModal
           key={selectedUser?.id || "new"}
           selectedUser={selectedUser}
           onClose={closeModal}
+          type={route}
         />
       )}
-      
 
-      {/* Mensagens de carregamento ou ausência de dados */}
       {loading ? (
         <ContentMessage message="Carregando dados..." />
       ) : data.length === 0 ? (
@@ -78,7 +69,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
           data={data}
           handleDelete={async (id) => {
             await handleDelete(id, route);
-            fetchData(); // Recarrega após deletar
+            fetchData();
           }}
           handleUpdate={(id) =>
             handleUpdate(id, data, setSelectedUser, setShowModal)
