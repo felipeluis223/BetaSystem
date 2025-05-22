@@ -5,10 +5,14 @@ import updateData from "../../services/api/Beta/update/dataUpdate";
 type ContentModalProps = {
   onClose: () => void;
   selectedUser: Record<string, any> | null;
-  type: string; // "user", "produto", etc.
+  type: string;
 };
 
-export default function ContentModal({ onClose, selectedUser, type }: ContentModalProps) {
+export default function ContentModal({
+  onClose,
+  selectedUser,
+  type,
+}: ContentModalProps) {
   const [formData, setFormData] = useState<Record<string, any>>({});
 
   useEffect(() => {
@@ -18,7 +22,7 @@ export default function ContentModal({ onClose, selectedUser, type }: ContentMod
   }, [selectedUser]);
 
   const handleChange = (key: string, value: any) => {
-    setFormData(prev => ({ ...prev, [key]: value }));
+    setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -58,33 +62,45 @@ export default function ContentModal({ onClose, selectedUser, type }: ContentMod
           onSubmit={handleSubmit}
           className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mt-[25px]"
         >
-          {Object.entries(formData).map(([key, value]) => (
-            <div key={key} className="flex flex-col">
-              <label className="text-sm font-medium mb-1 capitalize">{key}</label>
-              {typeof value === "number" ? (
-                <input
-                  type="number"
-                  value={value}
-                  onChange={e => handleChange(key, Number(e.target.value))}
-                  className="border p-2 rounded"
-                />
-              ) : typeof value === "boolean" ? (
-                <input
-                  type="checkbox"
-                  checked={value}
-                  onChange={e => handleChange(key, e.target.checked)}
-                  className="w-5 h-5"
-                />
-              ) : (
-                <input
-                  type="text"
-                  value={value}
-                  onChange={e => handleChange(key, e.target.value)}
-                  className="border p-2 rounded"
-                />
-              )}
-            </div>
-          ))}
+          {Object.entries(formData).map(([key, value]) => {
+            const isDisabled = key === "id";
+            const inputStyle = `border p-2 rounded ${
+              isDisabled ? "bg-gray-200 cursor-not-allowed" : ""
+            }`;
+
+            return (
+              <div key={key} className="flex flex-col">
+                <label className="text-sm font-medium mb-1 capitalize">
+                  {key}
+                </label>
+                {typeof value === "number" ? (
+                  <input
+                    type="number"
+                    value={value}
+                    onChange={(e) => handleChange(key, Number(e.target.value))}
+                    className={inputStyle}
+                    disabled={isDisabled}
+                  />
+                ) : typeof value === "boolean" ? (
+                  <input
+                    type="checkbox"
+                    checked={value}
+                    onChange={(e) => handleChange(key, e.target.checked)}
+                    className={`w-5 h-5 ${isDisabled ? "cursor-not-allowed" : ""}`}
+                    disabled={isDisabled}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    value={value}
+                    onChange={(e) => handleChange(key, e.target.value)}
+                    className={inputStyle}
+                    disabled={isDisabled}
+                  />
+                )}
+              </div>
+            );
+          })}
 
           <div className="col-span-full flex justify-center mt-2">
             <button

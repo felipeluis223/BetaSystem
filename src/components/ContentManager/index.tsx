@@ -19,7 +19,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   const [selectedUser, setSelectedUser] = useState<PropsData | null>(null);
   const [data, setData] = useState<PropsData[]>([]);
   const [loading, setLoading] = useState(true);
-  console.log(route)
+
   const fetchData = async () => {
     setLoading(true);
     const response = await contentAPI({ route });

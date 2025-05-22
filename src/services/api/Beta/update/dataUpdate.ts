@@ -26,7 +26,6 @@ const updateData = async (payload: PayloadType) => {
       employee: "/employees"
     };
 
-    console.log(payload)
     const response = await apiBeta.put(endpoint[payload.type], payload.data);
     return response;
     
