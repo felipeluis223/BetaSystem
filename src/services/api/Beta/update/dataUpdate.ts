@@ -26,7 +26,12 @@ const updateData = async (payload: PayloadType) => {
       employee: "/employees"
     };
 
-    const response = await apiBeta.put(endpoint[payload.type], payload.data);
+    const urlRaw = endpoint[payload.type];
+    const payloadId = payload.data.id;
+    const url = urlRaw + "/" + payloadId; 
+
+    console.log("url: ", url)
+    const response = await apiBeta.put(url, payload.data);
     return response;
     
   } catch (error) {
