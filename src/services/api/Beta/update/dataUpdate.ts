@@ -21,16 +21,10 @@ type PayloadType =
     };
 
 const updateData = async (payload: PayloadType) => {
-  console.log(payload)
+
   try {
-    
     const url = `${payload.type}/${payload.data.id}`;
-
-    console.log("URL gerada:", url);
-    console.log(payload.data)
-
     const response = await apiBeta.put(url, payload.data);
-
     return response;
     
   } catch (error) {
