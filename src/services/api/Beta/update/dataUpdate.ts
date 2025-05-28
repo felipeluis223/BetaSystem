@@ -21,19 +21,10 @@ type PayloadType =
     };
 
 const updateData = async (payload: PayloadType) => {
+  console.log(payload)
   try {
-    const endpoint = {
-      user: "/users",
-      employee: "/employees"
-    } as const;
-
-    const urlRaw = endpoint[payload.type];
-
-    if (!urlRaw) {
-      throw new Error(`Endpoint não encontrado para o tipo: ${payload.type}`);
-    }
-
-    const url = `${urlRaw}/${payload.data.id}`;
+    
+    const url = `${payload.type}/${payload.data.id}`;
 
     console.log("URL gerada:", url);
     console.log(payload.data)

@@ -28,9 +28,10 @@ export default function ContentModal({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    console.log(type);
+    
     try {
       const response = await updateData({ type, data: formData });
-
       if (response?.error) {
         alert(response.error);
         return;
