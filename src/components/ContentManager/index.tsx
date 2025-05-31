@@ -19,6 +19,8 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   const [selectedUser, setSelectedUser] = useState<PropsData | null>(null);
   const [data, setData] = useState<PropsData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [ showFormModal, setShowFormModal ] = useState(false);
+  
 
   const fetchData = async () => {
     setLoading(true);
@@ -36,11 +38,13 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
     setSelectedUser(null);
   };
 
-  const openCreateModal = () => {
+  const openCreateFormModal = () => {
     setSelectedUser(null); // Novo item
-    setShowModal(true);
+    setShowFormModal(true);
   };
 
+
+  console.log(setShowFormModal)
   return (
     <section style={{ padding: "2rem" }}>
       <div className="w-full h-[80px] flex justify-between items-start mb-4">
@@ -48,7 +52,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
           <h3 className="text-[1.6rem] font-bold">Tabela de Cadastro de {title}</h3>
           <span className="text-[16px] text-[#808080]">{describle}</span>
         </div>
-        <ContentButton onClick={openCreateModal} />
+        <ContentButton onClick={openCreateFormModal} />
       </div>
 
       {showModal && (
