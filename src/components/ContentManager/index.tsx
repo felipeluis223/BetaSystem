@@ -7,6 +7,7 @@ import { PropsData } from "../../services/types";
 import { handleUpdate } from "./contentHandlerUpdate";
 import ContentMessage from "../ContentMessage";
 import ContentButton from "../ContentButton";
+import ContentModalCreateForm from "../ContentModalCreateForm";
 
 interface PropsRoute {
   route: string;
@@ -54,6 +55,10 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
         </div>
         <ContentButton onClick={openCreateFormModal} />
       </div>
+      
+      {showFormModal && (
+        <ContentModalCreateForm />
+      )}
 
       {showModal && (
         <ContentModal
