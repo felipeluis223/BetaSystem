@@ -20,7 +20,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
   const [selectedUser, setSelectedUser] = useState<PropsData | null>(null);
   const [data, setData] = useState<PropsData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [ showFormModal, setShowFormModal ] = useState(false);
+  const [showFormModal, setShowFormModal] = useState(false);
   
 
   const fetchData = async () => {
@@ -39,13 +39,15 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
     setSelectedUser(null);
   };
 
+  const closeModalForm = () => {
+    setShowModal(false);
+  };
+
   const openCreateFormModal = () => {
     setSelectedUser(null); // Novo item
     setShowFormModal(true);
   };
 
-
-  console.log(setShowFormModal)
   return (
     <section style={{ padding: "2rem" }}>
       <div className="w-full h-[80px] flex justify-between items-start mb-4">
@@ -57,7 +59,7 @@ export default function ContentManager({ route, title, describle }: PropsRoute) 
       </div>
       
       {showFormModal && (
-        <ContentModalCreateForm />
+        <ContentModalCreateForm onClose={closeModalForm} />
       )}
 
       {showModal && (

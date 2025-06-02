@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
 
-export default function ContentModalCreateForm(){
+export default function ContentModalCreateForm({onClose}){
     return (
         <section className="modal-overlay flex justify-center items-center fixed inset-0 bg-black bg-opacity-40 z-50">
             <div className="modal-content w-full max-w-[600px] bg-[#f1f1f1] p-[20px] rounded-[10px]">
