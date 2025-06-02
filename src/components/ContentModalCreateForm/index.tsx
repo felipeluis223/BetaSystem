@@ -12,7 +12,7 @@ export default function ContentModalCreateForm(){
                 </div>
 
                 <span className="text-[#808080] text-[14px]">
-                Edite os dados desejados:
+                    Criar novo conteúdo:
                 </span>
 
             </div>
