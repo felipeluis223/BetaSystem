@@ -38,5 +38,6 @@ npm run dev
 VITE_BETA_BASE_URL=https://sua-api-url.com
 VITE_GOOGLE_ID_CLIENT=seu-google-client-id
 
+
 ```
 
